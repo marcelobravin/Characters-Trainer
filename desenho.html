@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171185330-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-171185330-2');
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Caligrafia</title>
+
+    <link rel="shortcut icon" href="assets/Japan-Flag-1-icon.png" />
+    <style type="text/css">
+        body {
+          background-color: mintcream;
+          /*background: url(assets/vintage-invitation-card-template-frame-600w-331376474.png) top center no-repeat;*/
+          margin: 0;
+        }
+
+        canvas {
+          border: 1px solid black;
+          background-color: white;
+          max-width: 100%;
+        }
+
+        .colorSelect {
+            display: inline-block;
+            width:10px;
+            height:10px;
+        }
+
+        html {
+        }
+        body    {
+            text-align: center;
+        }
+
+        table {
+            margin: 0 auto;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        td:nth-child(2) { font-weight: bold; }
+    </style>
+    <!-- <script src="assets/jquery.min.js"></script> -->
+    <script src="assets/japanese-chars.js"></script>
+    <script src="assets/russian-chars.js"></script>
+    <script src="assets/arabic-chars.js"></script>
+
+    <script>
+        var canvas, ctx, flag = false,
+            prevX = 0,
+            currX = 0,
+            prevY = 0,
+            currY = 0,
+            dot_flag = false;
+
+        var pencilWidth = 6;
+
+        var isDown = false;
+        var letra = "ج";
+
+        var chars;
+
+        if ( localStorage.getItem('idioma') == 'JP' ) {
+            chars = JChars;
+        } else if ( localStorage.getItem('idioma') == 'RU' ) {
+            chars = RChars;
+        } else if ( localStorage.getItem('idioma') == 'AR' ) {
+            chars = AChars;
+        } else {
+            window.location.href = 'index.html';
+        }
+
+        function init() {
+
+            canvas = document.getElementById('can');
+            ctx = canvas.getContext("2d");
+            sorteiaLetra();
+            exibeLetra();
+            exibeGuia();
+
+            w = canvas.width;
+            h = canvas.height;
+
+            /*
+            el.addEventListener("touchstart", handleStart, false);
+            el.addEventListener("touchend", handleEnd, false);
+            el.addEventListener("touchcancel", handleCancel, false);
+            el.addEventListener("touchleave", handleEnd, false);
+            el.addEventListener("touchmove", handleMove, false);
+            */
+            canvas.addEventListener("touchmove", function (e) {
+                // console.log("touchmove");
+                // findxy('move', e)
+                handleMove(e);
+            }, false);
+            canvas.addEventListener("touchstart", function (e) {
+                // console.log("touchstart");
+                isDown = true;
+                findxy('down', e)
+            }, false);
+
+            function handleMove(evt) {
+                evt.preventDefault();
+                var touches = evt.changedTouches;
+
+                for (var i=0; i < touches.length; i++) {
+
+                    ctx.beginPath();
+                    prevX = currX;
+                    prevY = currY;
+                    currX = touches[i].pageX - canvas.offsetLeft;
+                    currY = touches[i].pageY - canvas.offsetTop;
+                    draw("red");
+                }
+            }
+
+            canvas.addEventListener("mousemove", function (e) {
+                findxy('move', e)
+            }, false);
+            canvas.addEventListener("mousedown", function (e) {
+                isDown = true;
+                findxy('down', e)
+            }, false);
+            document.addEventListener("mouseup", function (e) {
+                isDown = false;
+                findxy('up', e)
+            }, false);
+            canvas.addEventListener("mouseout", function (e) {
+                findxy('out', e)
+            }, false);
+
+            canvas.addEventListener("mouseenter", function (e) {
+                if (isDown) {
+                    findxy('down', e)
+                }
+            }, false);
+
+            /* fixURL */
+            if ( localStorage.getItem('idioma') == 'JP') {
+                let x = document.querySelectorAll("nav a");
+                x[1].href = 'introducao-japones.html';
+            } else if ( localStorage.getItem('idioma') == 'AR') {
+                let x = document.querySelectorAll("nav a");
+                x[1].href = 'introducao-arabe.html';
+            }
+        }
+
+        function draw(color="black") {
+            ctx.beginPath();
+            ctx.moveTo(prevX, prevY);
+            ctx.lineTo(currX, currY);
+            ctx.strokeStyle = color;
+            ctx.lineWidth   = pencilWidth;
+            ctx.lineCap     = 'round';
+            ctx.stroke();
+            ctx.closePath();
+        }
+
+        function erase() {
+            ctx.clearRect(0, 0, w, h);
+            exibeGuia();
+            // exibirLetra = false;
+            document.getElementById("canvasimg").style.display = "none";
+        }
+
+        function save() {
+            document.getElementById("canvasimg").style.border = "2px solid";
+            var dataURL = canvas.toDataURL();
+            document.getElementById("canvasimg").src = dataURL;
+            document.getElementById("canvasimg").style.display = "inline";
+        }
+
+        function findxy(res, e) {
+            // document.getElementById("p").innerHTML = "left: " + prevX + ", top: " + prevY;
+            // document.getElementById("i").innerHTML = "left: " + currX + ", top: " + currY;
+
+            if (res == 'down') {
+                prevX = currX;
+                prevY = currY;
+                currX = e.clientX - canvas.offsetLeft;
+                currY = e.clientY - canvas.offsetTop;
+
+                flag = true;
+                dot_flag = true;
+                if (dot_flag) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = '#392bc0';
+                    ctx.arc(currX, currY, 2, 0, 2 * Math.PI, false);
+                    ctx.fill();
+                    ctx.stroke()
+
+                    ctx.closePath();
+                    dot_flag = false;
+                }
+            }
+            if (res == 'up' || res == "out") {
+                flag = false;
+            }
+            if (res == 'move') {
+                if (flag) {
+                    prevX = currX;
+                    prevY = currY;
+                    currX = e.clientX - canvas.offsetLeft;
+                    currY = e.clientY - canvas.offsetTop;
+                    draw("#392bc0");
+                }
+            }
+        }
+
+        var exibirLetra = false;
+        function exibeLetra (alterar=false)
+        {
+            if (alterar== true) {
+                exibirLetra = !exibirLetra;
+            }
+
+            ctx.textAlign    = "center";
+            ctx.textBaseline = "Alphabetic";
+            ctx.fillStyle    = "#000";
+
+            if ( localStorage.getItem('idioma') == 'AR' ) {
+                letra = letra.replaceAll('ـ', '');
+                ctx.font = "310px Arial";
+                // ctx.fillText(letra, 200, 330);
+                // ctx.fillText(letra, 60, 280);
+            } else {
+                ctx.font = "300px Arial";
+            }
+
+            ctx.fillText(letra, 200, 280);
+        }
+
+        function exibeGuia ()
+        {
+            ctx.beginPath();
+            ctx.strokeStyle = 'lime';
+            ctx.lineWidth   = pencilWidth;
+            ctx.lineCap     = 'square';
+
+            if ( localStorage.getItem('idioma') == 'AR' ) {
+
+                ctx.moveTo(0, 25);
+                ctx.lineTo(400, 25);
+                ctx.stroke();
+
+                ctx.moveTo(0, 240);
+                ctx.lineTo(400, 240);
+                ctx.stroke();
+
+            } else {
+
+                ctx.moveTo(0, 65);
+                ctx.lineTo(400, 65);
+                ctx.stroke();
+
+                ctx.moveTo(0, 280);
+                ctx.lineTo(400, 280);
+                ctx.stroke();
+            }
+
+            ctx.closePath();
+        }
+
+        function sorteiaLetra ()
+        {
+            let n = getRandomInt (0, chars.length);
+            chars[n].som.play();
+            sorteiaGrupoPalavras(n);
+        }
+
+        function sorteiaGrupoPalavras (n)
+        {
+            let position = getRandomInt (0, 2);
+            if (localStorage.getItem('idioma') == 'AR') {
+                position = getRandomInt (0, 4);
+                switch (position) {
+                    case 0: letra = chars[n].isolada;
+                        document.getElementById("i").innerHTML = "isolada";
+                        break;
+                    case 1: letra = chars[n].comeco;
+                        document.getElementById("i").innerHTML = "comeco";
+                        break;
+                    case 2: letra = chars[n].meio;
+                        document.getElementById("i").innerHTML = "meio";
+                        break;
+                    case 3: letra = chars[n].fim;
+                        document.getElementById("i").innerHTML = "fim";
+                        break;
+                }
+            } else if (localStorage.getItem('idioma') == 'JP') {
+                switch (position) {
+                    case 0: letra = chars[n].hiragana;
+                        document.getElementById("i").innerHTML = "hiragana";
+                        break;
+                    case 1: letra = chars[n].katakana;
+                        document.getElementById("i").innerHTML = "katakana";
+                        break;
+                }
+            } else {
+                switch (position) {
+                    case 0: letra = chars[n].hiragana;
+                        document.getElementById("i").innerHTML = "maiúscula";
+                        break;
+                    case 1: letra = chars[n].katakana;
+                        document.getElementById("i").innerHTML = "minúscula";
+                        break;
+                }
+            }
+
+            if (localStorage.getItem('idioma') == 'AR') {
+                document.getElementById("p").innerHTML = chars[n].caracter;
+            } else {
+                document.getElementById("p").innerHTML = chars[n].letra;
+            }
+        }
+
+        function trocaLetra ()
+        {
+            sorteiaLetra();
+            erase();
+            exibeGuia();
+
+            if (exibirLetra) {
+                exibeLetra();
+            }
+        }
+
+        function getRandomInt (min, max)
+        {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+    </script>
+</head>
+<body onload="init()">
+    <br>
+    <nav>
+        <a href="index.html" title="Seleção de idioma">Idiomas</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="introducao-russo.html" title="Introdução ao idioma">Introdução</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="caracteres.html" title="Memorização de Caracteres">Caracteres</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="vocabulario.html" title="Treino de Vocabulário">Vocabulário</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="desenho.html" title="Treino de Escrita">Escrita</a>
+    </nav>
+    <br>
+
+    <table>
+        <tr>
+            <td>Letra</td>
+            <td><span id="p">0</span></td>
+        </tr>
+        <tr>
+            <td>Variação</td>
+            <td><span id="i">0</span></td>
+        </tr>
+    </table>
+
+    <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
+
+    <label>
+        Show<input type="checkbox" value="show" size="23" onclick="exibeLetra(true)">
+    </label>
+    <div id="canvasContainer">
+        <canvas id="can" width="400" height="360" style="border:2px solid #c3c3c3;">
+            Your browser does not support the canvas element.
+        </canvas>
+    </div>
+
+    <input type="button" value="save" size="30" onclick="save()">
+    <input type="button" value="clear" size="23" onclick="erase()">
+    <input type="button" value="changeLetter" size="23" onclick="trocaLetra()">
+</body></html>

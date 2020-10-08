@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171185330-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-171185330-2');
+    </script>
+    <!-- controle de volume -->
+    <!-- sentence generator -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Introdução ao idioma Russo</title>
+    <link rel="shortcut icon" href="assets/russia-flag-icon-64.png" />
+    <style type="text/css">
+        body {
+            margin: 0 auto;
+            text-align: center;
+            background: transparent;
+        }
+
+        html {
+            border: 50px solid;
+            height: fit-content !important;
+            background-color: lightsteelblue;
+            border-image: url(assets/sansovino-frame-ng-london-ed-sm.jpg) 139 135 / 56px 55px / 0.3rem round;
+            /*border-image: url(assets/sansovino-frame-ng-london-ed-sm.jpg) 163 135 / 138px 64px / 0.3rem round;*/
+        }
+
+/*
+        html {
+            border: 130px solid;
+            height: fit-content !important;
+            background-color: lightsteelblue;
+            border-image: url(assets/sansovino-frame-ng-london-ed-sm.jpg) 173 136 / 156px 108px / 0.8rem round;
+        }
+*/
+
+        table {
+            border: 2px silver double;
+            display: inline-block;
+            background: white;
+            z-index: 9999;
+
+            border-collapse: collapse;
+            font-family: arial;
+        }
+
+
+        thead th {
+            font-weight: normal;
+            color: white;
+            background: #808000;
+            padding: 0 5px;
+            font-size: 16px;
+        }
+        td {
+            text-align: center;
+        }
+
+        td.copy {
+            opacity: .9; /* corrige problema de hover e z-index do zoomedChar */
+            color: #222;
+        }
+        td.copy:hover {color: black; text-shadow: 1px 1px 2px white;}
+
+        tbody tr:nth-child(odd) { background-color: aliceblue; }
+        tbody tr:hover { background: #dfd}
+
+        #transcription { margin: 10px 0; }
+        textarea {
+            display: inline-block;
+            width: 90%;
+            font-size: 70px;
+            height: 90px;
+            text-align: center;
+            vertical-align: middle;
+            text-shadow: 2px 2px 4px olive;
+            background: lavender;
+        }
+
+        .copy,
+        .letra { cursor: pointer; }
+
+        #zoomedChar {
+            /*display: none;*/
+            position: fixed;
+            z-index: 0;
+            text-align: center;
+            border: 1px solid black;
+            background: rgba(0,0,0,.4);
+            margin: 0 auto;
+            top: 0;
+            right: 0;
+            left: 0;
+            transition: 0.7s;
+            /*transition: opacity 0.3s;*/
+
+            opacity: 0;
+            font-size: 0;
+            width: 0;
+            height: 0;
+
+            text-shadow: 2px 2px 5px lime;
+            vertical-align: top;
+        }
+
+        #zoomedChar.visible {
+            font-size: 30rem;
+            width: 90%;
+            opacity: 1;
+            line-height: 100%;
+            height: 100%;
+        }
+
+        .letra { color: blue; }
+        a:hover,
+        .letra:hover { text-decoration: underline }
+
+        [data-egoista='true'] {
+            color:red;
+            opacity: .1 !important;
+        }
+
+
+
+        #copyText,
+        #reset {
+            color: white;
+            cursor: pointer;
+            padding: 10px 0;
+            width: 90px;
+            margin: 0 10px 20px;
+        }
+        #copyText { background: darkblue; }
+        #copyText:hover { background: blue; }
+        #reset { background: darkred; }
+        #reset:hover { background: red; }
+
+        .ta-l {
+            text-align: left;
+            background: white;
+            width: auto;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .text-box {
+            margin-bottom: 65px;
+        }
+
+        .tooltip {
+            position: relative;
+            /*display: inline-block;*/
+            margin: 0 auto;
+        }
+
+        .tooltip .tooltiptext {
+            /*visibility: hidden;*/
+            width: 140px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 6px;
+            left: 50%;
+            margin-left: -75px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+        .tooltip .tooltiptext.visible {
+            opacity: 1;
+        }
+
+
+        .flag {
+            width: 70px;
+            height: 46px;
+            vertical-align: middle;
+        }
+
+        li {
+            margin: 20px 0;
+            list-style: decimal;
+        }
+
+        a {
+            text-decoration: none
+        }
+
+        td.copy {
+        }
+
+        body
+        {
+            font-size: 1em;
+            font-family: arial;
+        }
+
+        img {max-width: 100%;}
+    </style>
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <script src="assets/jquery.min.js"></script>
+
+    <script>
+        $(document).on('click', '.copy', function(e) {
+            var text = $(this).text();
+            text = text.replaceAll('ـ', '');
+
+            $("#copy").show().val( $("#copy").val() +''+ text );
+
+            var transcription = $(this).data('character');
+            transcription = transcription.replaceAll('ـ', '');
+
+            $("#transcription").val( $("#transcription").val() +''+ transcription );
+        });
+
+        $(document).on('mouseenter', '.copy', function(e) {
+            var text = $(this).text();
+            $("#zoomedChar").text(text);
+            $("#zoomedChar").addClass("visible");
+        });
+
+        $(document).on('mouseleave', '.copy', function(e) {
+            $("#zoomedChar").removeClass("visible");
+        });
+
+        $(document).on('click', '.letra', function(e) {
+            let som = $(this).data('audio');
+            console.log(som);
+            audios[som].play();
+        });
+
+        $(document).on('click', '#reset', function(e) {
+            $("#copy").val('');
+            $("#transcription").val('');
+        });
+
+        $(document).on('click', '#copyText', function(e) {
+            $("#copy").select();
+            document.execCommand("copy");
+            $(".tooltiptext").text('Copiado!');
+            $(".tooltiptext").addClass('visible');
+            setTimeout(function(){
+                $(".tooltiptext").removeClass('visible');
+            }, 3000);
+        });
+
+        $(document).ready(function(){
+            const queryString = window.location.search;
+            let lang = findGetParameter('idioma')
+            localStorage.setItem('idioma', lang);
+        });
+
+        function findGetParameter(parameterName) {
+            var result = null,
+                tmp = [];
+            var items = location.search.substr(1).split("&");
+            for (var index = 0; index < items.length; index++) {
+                tmp = items[index].split("=");
+                if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+            }
+            return result;
+        }
+
+        /* Fonte: http://www.russianforeveryone.com/RufeA/Lessons/Introduction/Alphabet/Alphabet.htm
+        */
+        var audios = [];
+        audios['а']             = new Audio('assets/audio/russian/Sound1.mp3');
+        audios['be']            = new Audio('assets/audio/russian/Sound2.mp3');
+        audios['ve']            = new Audio('assets/audio/russian/Sound3.mp3');
+        audios['gue']           = new Audio('assets/audio/russian/Sound4.mp3');
+        audios['de']            = new Audio('assets/audio/russian/Sound5.mp3');
+        audios['ye']            = new Audio('assets/audio/russian/Sound6.mp3');
+        audios['yo']            = new Audio('assets/audio/russian/Sound7.mp3');
+        audios['je']            = new Audio('assets/audio/russian/Sound8.mp3');
+        audios['ze']            = new Audio('assets/audio/russian/Sound9.mp3');
+        audios['i']             = new Audio('assets/audio/russian/Sound10.mp3');
+        audios['i krátkaye']    = new Audio('assets/audio/russian/Sound11.mp3');
+        audios['ka']            = new Audio('assets/audio/russian/Sound12.mp3');
+        audios['él']            = new Audio('assets/audio/russian/Sound13.mp3');
+        audios['em']            = new Audio('assets/audio/russian/Sound14.mp3');
+        audios['en']            = new Audio('assets/audio/russian/Sound15.mp3');
+        audios['o']             = new Audio('assets/audio/russian/Sound16.mp3');
+        audios['pe']            = new Audio('assets/audio/russian/Sound17.mp3');
+        audios['er']            = new Audio('assets/audio/russian/Sound18.mp3');
+        audios['es']            = new Audio('assets/audio/russian/Sound19.mp3');
+        audios['te']            = new Audio('assets/audio/russian/Sound20.mp3');
+        audios['u']             = new Audio('assets/audio/russian/Sound21.mp3');
+        audios['éf']            = new Audio('assets/audio/russian/Sound22.mp3');
+        audios['kha']           = new Audio('assets/audio/russian/Sound23.mp3');
+        audios['tse']           = new Audio('assets/audio/russian/Sound24.mp3');
+        audios['tche']          = new Audio('assets/audio/russian/Sound25.mp3');
+        audios['cha']           = new Audio('assets/audio/russian/Sound26.mp3');
+        audios['chtcha']        = new Audio('assets/audio/russian/Sound27.mp3');
+        audios['tvyórdêi znak'] = new Audio('assets/audio/russian/Sound28.mp3');
+        audios['ê']             = new Audio('assets/audio/russian/Sound29.mp3');
+        audios['myahkiy znak']  = new Audio('assets/audio/russian/Sound30.mp3');
+        audios['e']             = new Audio('assets/audio/russian/Sound31.mp3');
+        audios['yu']            = new Audio('assets/audio/russian/Sound32.mp3');
+        audios['ya']            = new Audio('assets/audio/russian/Sound33.mp3');
+    </script>
+</head>
+
+<body>
+    <br>
+    <nav>
+        <a href="index.html" title="Seleção de idioma">Idiomas</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="introducao-russo.html" title="Introdução ao idioma">Introdução</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="caracteres.html" title="Memorização de Caracteres">Caracteres</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="vocabulario.html" title="Treino de Vocabulário">Vocabulário</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="desenho.html" title="Treino de Escrita">Escrita</a>
+    </nav>
+    <span id="zoomedChar"></span>
+    <br>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Letra</th>
+                <th>Transcrição</th>
+                <th>Minúscula</th>
+                <th>Maiúscula</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="letra" data-audio="а">а</td>
+                <td>a</td>
+                <td class="copy" data-character="a">а</td>
+                <td class="copy" data-character="A">А</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="be">be</td>
+                <td>b</td>
+                <td class="copy" data-character="b">б</td>
+                <td class="copy" data-character="B">Б</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="ve">ve</td>
+                <td>v</td>
+                <td class="copy" data-character="v">в</td>
+                <td class="copy" data-character="V">В</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="gue">gue</td>
+                <td>g</td>
+                <td class="copy" data-character="g">г</td>
+                <td class="copy" data-character="G">Г</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="de">de</td>
+                <td>d</td>
+                <td class="copy" data-character="d">д</td>
+                <td class="copy" data-character="D">Д</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="ye">ye</td>
+                <td>ie</td>
+                <td class="copy" data-character="ie">е</td>
+                <td class="copy" data-character="Ie">Е</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="yo">yo</td>
+                <td>io</td>
+                <td class="copy" data-character="io">ё</td>
+                <td class="copy" data-character="Io">Ё</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="je">je</td>
+                <td>zh</td>
+                <td class="copy" data-character="zh">ж</td>
+                <td class="copy" data-character="Zh">Ж</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="ze">ze</td>
+                <td>z</td>
+                <td class="copy" data-character="z">з</td>
+                <td class="copy" data-character="z">З</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="i">i</td>
+                <td>i</td>
+                <td class="copy" data-character="i">и</td>
+                <td class="copy" data-character="I">И</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="i krátkaye">i krátkaye</td>
+                <td>y</td>
+                <td class="copy" data-character="y">й</td>
+                <td class="copy" data-character="Y">Й</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="ka">ka</td>
+                <td>k</td>
+                <td class="copy" data-character="k">к</td>
+                <td class="copy" data-character="K">К</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="él">él</td>
+                <td>l</td>
+                <td class="copy" data-character="l">л</td>
+                <td class="copy" data-character="L">Л</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="em">em</td>
+                <td>m</td>
+                <td class="copy" data-character="m">м</td>
+                <td class="copy" data-character="M">М</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="en">en</td>
+                <td>n</td>
+                <td class="copy" data-character="n">н</td>
+                <td class="copy" data-character="N">Н</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="o">o</td>
+                <td>o</td>
+                <td class="copy" data-character="o">о</td>
+                <td class="copy" data-character="O">О</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="pe">pe</td>
+                <td>p</td>
+                <td class="copy" data-character="p">п</td>
+                <td class="copy" data-character="P">П</td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <thead>
+            <tr>
+                <th>Letra</th>
+                <th>Transcrição</th>
+                <th>Minúscula</th>
+                <th>Maiúscula</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="letra" data-audio="er">er</td>
+                <td>r</td>
+                <td class="copy" data-character="r">р</td>
+                <td class="copy" data-character="R">Р</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="es">es</td>
+                <td>s</td>
+                <td class="copy" data-character="s">с</td>
+                <td class="copy" data-character="S">С</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="te">te</td>
+                <td>t</td>
+                <td class="copy" data-character="t">т</td>
+                <td class="copy" data-character="T">Т</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="u">u</td>
+                <td>u</td>
+                <td class="copy" data-character="u">у</td>
+                <td class="copy" data-character="U">У</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="éf">éf</td>
+                <td>f</td>
+                <td class="copy" data-character="f">ф</td>
+                <td class="copy" data-character="F">Ф</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="kha">kha</td>
+                <td>x</td>
+                <td class="copy" data-character="x">х</td>
+                <td class="copy" data-character="X">Х</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="tse">tse</td>
+                <td>ts</td>
+                <td class="copy" data-character="ts">ц</td>
+                <td class="copy" data-character="Ts">Ц</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="tche">tche</td>
+                <td>ch</td>
+                <td class="copy" data-character="ch">ч</td>
+                <td class="copy" data-character="Ch">Ч</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="cha">cha</td>
+                <td>sh</td>
+                <td class="copy" data-character="sh">ш</td>
+                <td class="copy" data-character="Sh">Ш</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="chtcha">chtcha</td>
+                <td>tsch</td>
+                <td class="copy" data-character="tsch">щ</td>
+                <td class="copy" data-character="Tsch">Щ</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="tvyórdêi znak">tvyórdêi znak</td>
+                <td>'</td>
+                <td class="copy" data-character="'">ъ</td>
+                <td class="copy" data-character="'">Ъ</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="ê">ê</td>
+                <td>'</td>
+                <td class="copy" data-character="'">ы</td>
+                <td class="copy" data-character="'">Ы</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="myahkiy znak">myahkiy znak</td>
+                <td>'</td>
+                <td class="copy" data-character="'">ь</td>
+                <td class="copy" data-character="'">Ь</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="e">e</td>
+                <td>e</td>
+                <td class="copy" data-character="e">э</td>
+                <td class="copy" data-character="E">Э</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="yu">yu</td>
+                <td>yu</td>
+                <td class="copy" data-character="yu">ю</td>
+                <td class="copy" data-character="Yu">Ю</td>
+            </tr>
+            <tr>
+                <td class="letra" data-audio="ya">ya</td>
+                <td>ya</td>
+                <td class="copy" data-character="ya">я</td>
+                <td class="copy" data-character="Ya">Я</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+
+
+    <div class="tooltip">
+        <span class="tooltiptext">Tooltip text</span>
+    </div>
+
+    <input id="transcription">
+    <textarea id="copy"></textarea>
+
+    <p>
+        <button id="copyText">Copiar</button>
+        <button id="reset">Limpar</button>
+    </p>
+
+    <br>
+    <img src="assets/flat-design-russia-day-celebration_23-2148548925.jpg">
+    <br>
+    <br>
+
+    <div class="ta-l">
+        <h2>Gramática</h2>
+        <div class="text-box">
+            <p>O alfabeto árabe contém 28 letras básicas.</p>
+            <p>Não existem as consoantes P e V.</p>
+
+            Vogais (10)
+            а о э у ы и е ё ю я
+            Consoantes (21)
+            б в г д ж з й к л м н п р с т ф х ц ч ш щ
+            Sinais sem som (2)
+            ь ъ
+        </div>
+
+        <h2>História</h2>
+        <div class="text-box">
+            Os dois sinais são “Ъ” e “Ь”. De acordo com o professor Diego Leite de Oliveira, eles são usados depois da letra que se pretende marcar. O primeiro (Ъ) está caindo em desuso por indicar o som normal da consoante. Já o segundo (Ь) é bastante usado na escrita: indica som palatalizado e/ou pausa após o caractere marcado. É também utilizado no fim da palavra para indicar o infinitivo do verbo. O russo não utiliza quaisquer outros sinais gráficos além desses. É uma língua que não tem acentos.
+
+            Russo
+
+            russo diego 350
+            Diego Leite Oliveira, professor adjunto de Língua Russa e coordenador do Núcleo de Estudos em Eslavística da UFRJ. MultiRio, 2018
+            O russo também não tem uma sílaba tônica predominante. Ela é bem distribuída entre o conjunto de vocábulos da língua, diferentemente do francês (cuja maioria das palavras é oxítona), do português (paroxítona) e do inglês (proparoxítona). Aliás, no russo, a sílaba tônica pode variar conforme a flexão da palavra, como é o caso de вода (água, pronunciada como vadá) e воды (águas, pronunciada como vódi). Observe que, no singular, a palavra é oxítona e, no plural, paroxítona. Perceba também que o som da vogal “o” mudou, pois é falada como “ó”, quando está numa sílaba tônica, e como “a”, quando em átona. E isso é uma regra geral. Repare que em cпасибо (leia-se spaciba, obrigado), o “o” tem som de “a”.
+
+            Para quem não conhece a língua, ela parece ainda mais confusa e complicada quando se sabe que não existe uma letra única para designar o plural, como o “s” em francês, espanhol, inglês, ou o “i” em italiano. Mas o professor da UFRJ está convencido de que o português é muito mais difícil que o russo, a começar pelos sons nasais (como “ão”) – impronunciáveis para a maioria das pessoas do planeta – e pelos verbos.
+
+            Não existe modo subjuntivo em russo. E, no indicativo, só há presente passado e futuro. “No caso do passado, apenas se coloca um prefixo para denotar se a ação foi concluída, ou não”, explica Diego. E mais! No caso do passado, não existe apenas variação de número, mas também de gênero. Ainda assim, a conjugação não parece complicada, bastando acrescentar ao radical o sufixo “л”, no masculino, “ла”, no feminino, e “ли” para o plural.
+
+            Já as formas nominais são mais complexas que em português. Existe gerúndio do presente e do passado – eu estou fazendo (Я делаю), eu estava fazendo (Я делал) – assim como no particípio, que ainda é conjugado de forma diferente nas vozes ativa e passiva. “O que precisamos prestar atenção, no caso dos verbos, é que sempre se usa a segunda pessoa do plural (vós) para se dirigir a alguém que não é íntimo. O tu (você) só é empregado quando a pessoa é bem próxima”, alerta o professor.
+
+            Gêneros e flexão sintática
+
+            Russo analfabetismo 350 2
+            "Um homem analfabeto é como um homem cego. Fracasso e desgraça o aguardam por toda a parte", diz cartaz de campanha contra o analfabetismo, três anos após a Revolução Russa. Aleksei Radakov, 1920
+            O russo tem, segundo Diego, três flexões de gênero. Além dos substantivos masculinos e femininos, há também o neutro. Дом (casa, pronunciada como dom), por exemplo, é masculino. Луна (lua, luná) é feminino. E солнце (sol, solntse) é neutro. A língua, contudo, não tem artigo definido, nem indefinido.
+
+            Outra característica do idioma é a variabilidade da posição sintática das palavras. No português, há uma ordem “natural” no arranjo delas: sujeito, verbo, objeto direto e objeto indireto. Não que essa seja a única ordenação viável, mas é a mais clara e a mais inteligível. Já no russo, a disposição dos vocábulos na frase é muito mais flexível, sem prejudicar a compreensão. Isso é possível porque, no idioma, as palavras também são flexionadas conforme sua função sintática.
+
+            Em português, se trocássemos de posição o sujeito e o objeto direto na frase “João viu Maria”, o significado seria prejudicado, pois ficaria “Maria viu João”.
+
+            Já no russo, isso não acontece. “João viu Maria” pode ser dito e escrito assim “Иван увидел Марию” (leia-se Ivan uvidel Mariiu). E não é preciso trocar a posição do sujeito e do objeto direto para dizer “Maria viu João”. Basta mudar a flexão das palavras: “Иванa увиделa Мариюя” (Ivana uvidela Marii).
+        </div>
+
+        <h2>História</h2>
+        <div class="text-box">
+            Cirílico e eslavo
+
+            O russo, tal como o português, pertence à vasta família das línguas indo-europeias, que se dividem em vários troncos. Entre eles, o latim, o sânscrito, o persa, o germânico e o eslavo, este último organizado em três ramos principais: o oriental (russo, ucraniano e bielorrusso), o ocidental (polaco, checo, eslovaco e sorábio) e o meridional (búlgaro, macedônio, servo-croata e esloveno).
+
+            Diferentemente do latim, cujos textos mais antigos remontam ao século VI a.C., o eslavo foi uma língua estritamente oral até o século IX d.C., quando os irmãos Cirilo e Methodio decidiram organizar sua representação escrita, a fim de facilitar a evangelização dos povos da Europa Central. Nascidos na Macedônia, eles dominavam as línguas grega (do pai) e eslava (da mãe). Segundo Diego Leite de Oliveira, professor adjunto de Língua Russa do Departamento de Línguas Orientais e Eslavas da Faculdade de Letras da UFRJ, o cirílico foi criado por eles a partir do alfabeto grego e, ainda, do hebraico, por influência das escrituras sagradas.
+
+            O alfabeto cirílico russo atual tem 33 caracteres: 11 vogais, 20 consoantes e 2 sinais.
+        </div>
+    </div>
+    <br>
+    <br>
+
+    <div id="google_translate_element"></div>
+
+    <br>
+    <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+    }
+    </script>
+
+    <!-- <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
+    <script type="text/javascript">
+        (function(){var gtConstEvalStartTime = new Date();/*
+
+         Copyright The Closure Library Authors.
+         SPDX-License-Identifier: Apache-2.0
+        */
+        function d(b){var a=document.getElementsByTagName("head")[0];a||(a=document.body.parentNode.appendChild(document.createElement("head")));a.appendChild(b)}function _loadJs(b){var a=document.createElement("script");a.type="text/javascript";a.charset="UTF-8";a.src=b;d(a)}function _loadCss(b){var a=document.createElement("link");a.type="text/css";a.rel="stylesheet";a.charset="UTF-8";a.href=b;d(a)}function _isNS(b){b=b.split(".");for(var a=window,c=0;c<b.length;++c)if(!(a=a[b[c]]))return!1;return!0}
+        function _setupNS(b){b=b.split(".");for(var a=window,c=0;c<b.length;++c)a.hasOwnProperty?a.hasOwnProperty(b[c])?a=a[b[c]]:a=a[b[c]]={}:a=a[b[c]]||(a[b[c]]={});return a}window.addEventListener&&"undefined"==typeof document.readyState&&window.addEventListener("DOMContentLoaded",function(){document.readyState="complete"},!1);
+        if (_isNS('google.translate.Element')){return}(function(){var c=_setupNS('google.translate._const');c._cest = gtConstEvalStartTime;gtConstEvalStartTime = undefined;c._cl='en';c._cuc='googleTranslateElementInit';c._cac='';c._cam='';c._ctkk='444784.3169828605';var h='translate.googleapis.com';var s=(true?'https':window.location.protocol=='https:'?'https':'http')+'://';var b=s+h;c._pah=h;c._pas=s;c._pbi=b+'/translate_static/img/te_bk.gif';c._pci=b+'/translate_static/img/te_ctrl3.gif';c._pli=b+'/translate_static/img/loading.gif';c._plla=h+'/translate_a/l';c._pmi=b+'/translate_static/img/mini_google.png';c._ps=b+'/translate_static/css/translateelement.css';c._puh='translate.google.com';_loadCss(c._ps);_loadJs(b+'/translate_static/js/element/main.js');})();})();
+    </script>
+</body></html>

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171185330-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-171185330-2');
+    </script>
+    <!-- controle de volume -->
+    <!-- sentence generator -->
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Letras semelhantes</title>
+    <link rel="shortcut icon" href="assets/Japan-Flag-1-icon.png" />
+    <style type="text/css">
+        th {
+            text-transform: uppercase;
+            /*font-size: 12px;*/
+            font-weight: normal;
+            color: white;
+            background: #808000;
+        }
+        td {
+            text-align: center;
+            font-size: 30px;
+            width: 80px;
+        }
+
+
+/*a,p,*/
+
+
+        body {
+            margin: 0 auto;
+            text-align: center;
+            background: transparent;
+            /*border-image: url('assets/arc.png') 30 / 19px round;*/
+        }
+        html {
+            border: 60px solid;
+            height: fit-content !important;
+            background-color: antiquewhite;
+
+            /*border-image: url("assets/arc.png") 188 109 / 51px 35px / 0rem round;*/
+            border-image: url("assets/arc.png") 203 173 / 90px 79px / 0rem round;
+            /*border-image: url("assets/arc.png") 140 262 / 65px 86px / 0px 0px round;*/
+            /*border-image: url("assets/arc.png") 163 163 / 70px 59px / 0rem round;*/
+        }
+        table {
+            margin: 10px 30px 0 30px;
+            border: 2px silver double;
+            display: inline-block;
+            background: white;
+            z-index: 9999;
+
+            border-collapse: collapse;
+        }
+        td:nth-child(1) { width: 30px; }
+        td:nth-child(2) { width: 63px; text-align: left; padding-left: 5px}
+        td:nth-child(3) { width: 45px; }
+        td.copy {
+            width: 55px;
+            opacity: .9; /* corrige problema de hover e z-index do zoomedChar */
+            color: #222;
+        }
+        td.copy:hover {color: black; text-shadow: 1px 1px 2px white;}
+
+        tbody tr:nth-child(odd) { background-color: #ffd; }
+        /*tbody tr { border: 1px solid transparent }*/
+        tbody tr:hover { /*border: 1px solid black;*/ background: #dfd}
+
+        #transcription {
+            margin: 10px 0;
+        }
+        textarea {
+            display: inline-block;
+            width: 90%;
+            font-size: 70px;
+            height: 90px;
+            text-align: center;
+            vertical-align: middle;
+            text-shadow: 2px 2px 4px olive;
+            background: darkkhaki;
+        }
+
+        .copy,
+        .letra { cursor: pointer; }
+
+        #zoomedChar {
+            /*display: none;*/
+            position: fixed;
+            z-index: 0;
+            text-align: center;
+            border: 1px solid black;
+            background: rgba(0,0,0,.4);
+            margin: 0 auto;
+            top: 0;
+            right: 0;
+            left: 0;
+            transition: 0.7s;
+            /*transition: opacity 0.3s;*/
+
+            opacity: 0;
+            font-size: 0;
+            width: 0;
+            height: 0;
+
+            text-shadow: 2px 2px 5px lime;
+            vertical-align: top;
+        }
+        #zoomedChar.visible {
+            font-size: 530px;
+            width: 90%;
+            opacity: 1;
+            line-height: 100%;
+            height: 100%;
+        }
+
+        pre {
+            text-align: left
+        }
+
+        .letra { color: blue; }
+        a:hover,
+        .letra:hover { text-decoration: underline }
+
+        [data-egoista='true'] {
+            color:red;
+            opacity: .1 !important;
+        }
+
+
+
+        #copyText,
+        #reset {
+            color: white;
+            cursor: pointer;
+            padding: 10px 0;
+            width: 90px;
+            margin: 0 10px 20px;
+        }
+        #copyText { background: darkblue; }
+        #copyText:hover { background: blue; }
+        #reset { background: darkred; }
+        #reset:hover { background: red; }
+
+        pre {
+            text-align: left;
+            /* word-break: break-all; */
+            /*line-break: anywhere;*/
+            white-space: break-spaces;
+        }
+
+        .ta-l {
+            text-align: left;
+            background: white;
+            width: 700px;
+            max-width: 75%;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .text-box {
+            margin-bottom: 65px;
+        }
+
+        .tooltip {
+            position: relative;
+            /*display: inline-block;*/
+            margin: 0 auto;
+        }
+
+        .tooltip .tooltiptext {
+            /*visibility: hidden;*/
+            width: 140px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 6px;
+            left: 50%;
+            margin-left: -75px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+        .tooltip .tooltiptext.visible {
+            /*visibility: visible;*/
+            opacity: 1;
+        }
+
+
+        .flag {
+            width: 70px;
+            height: 46px;
+            vertical-align: middle;
+        }
+
+        li {
+            margin: 20px 0;
+            list-style: decimal;
+            /*display: inline-block;*/
+            /*width: 300px;*/
+            /*float: right;*/
+        }
+
+        a {
+            text-decoration: none
+        }
+
+        td.copy {
+            font-size: 22px;
+        }
+        th,
+        body,
+        td.portugues {
+            font-size: 14px;
+            font-family: arial;
+        }
+/*
+        @media (min-width: 320px) and (max-width: 480px) {
+          td.copy {
+              font-size: 42px !important;
+          }
+
+          th,
+          body,
+          td.portugues {
+              font-size: 18px !important;
+          }
+
+          a {
+              color: red;
+              font-size: 10px;
+          }
+        }
+*/
+    </style>
+
+    <script>
+        $(document).on('click', '.copy', function(e) {
+            var text = $(this).text();
+            text = text.replaceAll('ـ', '');
+
+            $("#copy").show().val( $("#copy").val() +''+ text );
+
+            var transcription = $(this).data('character');
+            transcription = transcription.replaceAll('ـ', '');
+
+            $("#transcription").val( $("#transcription").val() +''+ transcription );
+        });
+
+        $(document).on('mouseenter', '.copy', function(e) {
+            var text = $(this).text();
+            $("#zoomedChar").text(text);
+            $("#zoomedChar").addClass("visible");
+        });
+
+        $(document).on('mouseleave', '.copy', function(e) {
+            $("#zoomedChar").removeClass("visible");
+        });
+
+        $(document).on('click', '.letra', function(e) {
+            let som = $(this).data('audio');
+            audios[som].play();
+        });
+
+        $(document).on('click', '#reset', function(e) {
+            $("#copy").val('');
+            $("#transcription").val('');
+        });
+
+        $(document).on('click', '#copyText', function(e) {
+            $("#copy").select();
+            document.execCommand("copy");
+            $(".tooltiptext").text('Copiado!');
+            $(".tooltiptext").addClass('visible');
+            setTimeout(function(){
+                $(".tooltiptext").removeClass('visible');
+            }, 3000);
+
+        });
+
+        /* Fonte: https://lang_src.s3.amazonaws.com/yaa_a.mp3 */
+        var audios = [];
+        audios['alif_a']  = new Audio('assets/audio/alif_a.mp3');
+        audios['ayn_a']   = new Audio('assets/audio/ayn_a.mp3');
+        audios['baa_a']   = new Audio('assets/audio/baa_a.mp3');
+        audios['daad_a']  = new Audio('assets/audio/daad_a.mp3');
+        audios['daal_a']  = new Audio('assets/audio/daal_a.mp3');
+        audios['dhaa_a']  = new Audio('assets/audio/dhaa_a.mp3');
+        audios['dhaal_a'] = new Audio('assets/audio/dhaal_a.mp3');
+        audios['faa_a']   = new Audio('assets/audio/faa_a.mp3');
+        audios['ghayn_a'] = new Audio('assets/audio/ghayn_a.mp3');
+        audios['Haa_a1']  = new Audio('assets/audio/Haa_a1.mp3');
+        audios['haa_a2']  = new Audio('assets/audio/haa_a2.mp3');
+        audios['jiim_a']  = new Audio('assets/audio/jiim_a.mp3');
+        audios['kaaf_a']  = new Audio('assets/audio/kaaf_a.mp3');
+        audios['khaa_a']  = new Audio('assets/audio/khaa_a.mp3');
+        audios['laam_a']  = new Audio('assets/audio/laam_a.mp3');
+        audios['miim_a']  = new Audio('assets/audio/miim_a.mp3');
+        audios['nuun_a']  = new Audio('assets/audio/nuun_a.mp3');
+        audios['qaaf_a']  = new Audio('assets/audio/qaaf_a.mp3');
+        audios['raa_a']   = new Audio('assets/audio/raa_a.mp3');
+        audios['saad_a']  = new Audio('assets/audio/saad_a.mp3');
+        audios['shiin_a'] = new Audio('assets/audio/shiin_a.mp3');
+        audios['siin_a']  = new Audio('assets/audio/siin_a.mp3');
+        audios['taa_a']   = new Audio('assets/audio/taa_a.mp3');
+        audios['Taa2_a']  = new Audio('assets/audio/Taa2_a.mp3');
+        audios['thaa_a']  = new Audio('assets/audio/thaa_a.mp3');
+        audios['waaw_a']  = new Audio('assets/audio/waaw_a.mp3');
+        audios['yaa_a']   = new Audio('assets/audio/yaa_a.mp3');
+        audios['zaa_a']   = new Audio('assets/audio/zaa_a.mp3');
+    </script>
+</head>
+
+<body>
+    <p>
+        <a href="index.html">Voltar para home</a>
+    </p>
+
+    <h1>
+        letras "problemáticas"
+    </h1>
+
+    <h2>Sons semelhantes</h2>
+    <table>
+        <tbody>
+            <tr>
+                <td>Dhāl</td>
+                <td>ḏ</td>
+                <td>ذ</td>
+            </tr>
+            <tr>
+                <td>Dād</td>
+                <td>ḍ</td>
+                <td>ض</td>
+            </tr>
+            <tr>
+                <td>Tā</td>
+                <td>t</td>
+                <td>ت</td>
+            </tr>
+            <tr>
+                <td>Tā</td>
+                <td>ṭ</td>
+                <td>ط</td>
+            </tr>
+            <tr>
+                <td>Hā</td>
+                <td>h</td>
+                <td>ه</td>
+            </tr>
+            <tr>
+                <td>Hā</td>
+                <td>ḥ</td>
+                <td>ح</td>
+            </tr>
+            <tr>
+                <td>Shīn</td>
+                <td>š</td>
+                <td>ش</td>
+            </tr>
+            <tr>
+                <td>Sād</td>
+                <td>ṣ</td>
+                <td>ص</td>
+            </tr>
+            <tr>
+                <td>Zā</td>
+                <td>ż</td>
+                <td>ظ</td>
+            </tr>
+            <tr>
+                <td>Zāin</td>
+                <td>z</td>
+                <td>ز</td>
+            </tr>
+            <tr>
+                <td>Qaf</td>
+                <td>q</td>
+                <td>ق</td>
+            </tr>
+            <tr>
+                <td>Kāf</td>
+                <td>k</td>
+                <td>ك</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <h2>Traços semelhantes</h2>
+    <table>
+        <tbody>
+            <tr><td>Tā</td><td>ṭ</td><td>ط</td></tr>
+            <tr><td>Zā</td><td>ż</td><td>ظ</td></tr>
+            <tr><td>Ain</td><td>ʿ</td><td>ع</td></tr>
+            <tr><td>Ghain</td><td>ġ</td><td>غ</td></tr>
+            <tr><td>Fā</td><td>f</td><td>ف</td></tr>
+            <tr><td>Qaf</td><td>q</td><td>ق</td></tr>
+            <tr><td>Wāw</td><td>w</td><td>و</td></tr>
+            <tr><td>Nūn</td><td>n</td><td>ن</td></tr>
+            <tr><td>Bā</td><td>b</td><td>ب</td></tr>
+            <tr><td>Tā</td><td>t</td><td>ت</td></tr>
+            <tr><td>Thā</td><td>t</td><td>ث</td></tr>
+            <tr><td>Jīm</td><td>ğ</td><td>ج</td></tr>
+            <tr><td>Hā</td><td>ḥ</td><td>ح</td></tr>
+            <tr><td>Khā</td><td>ḫ</td><td>خ</td></tr>
+            <tr><td>Dāl</td><td>d</td><td>د</td></tr>
+            <tr><td>Dhāl</td><td>ḏ</td><td>ذ</td></tr>
+            <tr><td>Rā</td><td>r</td><td>ر</td></tr>
+            <tr><td>Zāin</td><td>z</td><td>ز</td></tr>
+            <tr><td>Sīn</td><td>s</td><td>س</td></tr>
+            <tr><td>Shīn</td><td>š</td><td>ش</td></tr>
+            <tr><td>Sād</td><td>ṣ</td><td>ص</td></tr>
+            <tr><td>Dād</td><td>ḍ</td><td>ض</td></tr>
+        </tbody>
+    </table>
+
+
+    <p>
+        <a href="caracteres.html">Memorização de Caracteres</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="vocabulario.html">Treino de Vocabulário</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="desenho.html">Treino de Escrita</a>
+    </p>
+    <span id="zoomedChar"></span>
+
+</body></html>

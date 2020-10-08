@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171185330-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-171185330-2');
+    </script>
+    <!-- controle de volume -->
+    <!-- sentence generator -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Introdução ao idioma Japonês</title>
+    <link rel="shortcut icon" href="assets/Japan-Flag-1-icon.png" />
+    <style type="text/css">
+        body {
+            margin: 0 auto;
+            text-align: center;
+            background: transparent;
+        }
+
+        html {
+            border: 40px solid;
+            height: fit-content !important;
+            background-color: maroon;
+            /*background-image: url('assets/japanese-seamless-waves-19340781.jpg');*/
+
+            border-image: url(assets/traditional-red-wooden-carved-japanese-chinese-arch-vector-frame-arched-entry-portal-style-gate-arbor-171539890.jpg) 212 112 / 51px 49px / 0rem round;
+            /*border-image: url("assets/traditional-red-wooden-carved-japanese-chinese-arch-vector-frame-arched-entry-portal-style-gate-arbor-171539890.jpg") 218 173 / 90px 79px / 0rem round;*/
+        }
+
+/*
+        html {
+            border: 130px solid;
+            height: fit-content !important;
+            background-color: lightsteelblue;
+            border-image: url(assets/sansovino-frame-ng-london-ed-sm.jpg) 173 136 / 156px 108px / 0.8rem round;
+        }
+*/
+
+        table {
+            border: 2px silver double;
+            display: inline-block;
+            background: white;
+            z-index: 9999;
+
+            border-collapse: collapse;
+            font-family: arial;
+            margin: 0 10px;
+        }
+
+
+        th {
+            font-weight: normal;
+            color: white;
+            background: #808000;
+            padding: 0 5px;
+            font-size: 16px;
+            padding: 0 5px;
+        }
+        td {
+            text-align: center;
+            margin: 2px 10px;
+            padding: 1px 10px;
+        }
+
+
+        td.copy {
+            opacity: .9; /* corrige problema de hover e z-index do zoomedChar */
+            color: #222;
+            font-size: 20px;
+        }
+        td.copy:hover {color: black; text-shadow: 1px 1px 2px white;}
+
+        tbody tr:nth-child(odd) { background-color: aliceblue; }
+        tbody tr:hover { background: #dfd}
+
+        #transcription { margin: 10px 0; }
+        textarea {
+            display: inline-block;
+            width: 90%;
+            font-size: 70px;
+            height: 90px;
+            text-align: center;
+            vertical-align: middle;
+            text-shadow: 2px 2px 4px olive;
+            background: lavender;
+        }
+
+        .copy,
+        .letra { cursor: pointer; }
+
+        #zoomedChar {
+            /*display: none;*/
+            position: fixed;
+            z-index: 0;
+            text-align: center;
+            border: 1px solid black;
+            background: rgba(0,0,0,.4);
+            margin: 0 auto;
+            top: 0;
+            right: 0;
+            left: 0;
+            transition: 0.7s;
+            /*transition: opacity 0.3s;*/
+
+            opacity: 0;
+            font-size: 0;
+            width: 0;
+            height: 0;
+
+            text-shadow: 2px 2px 5px lime;
+            vertical-align: top;
+        }
+
+        #zoomedChar.visible {
+            font-size: 30rem;
+            width: 90%;
+            opacity: 1;
+            line-height: 100%;
+            height: 100%;
+        }
+
+        .letra { color: blue; }
+        a:hover,
+        .letra:hover { text-decoration: underline }
+
+        [data-egoista='true'] {
+            color:red;
+            opacity: .1 !important;
+        }
+
+
+
+        #copyText,
+        #reset {
+            color: white;
+            cursor: pointer;
+            padding: 10px 0;
+            width: 90px;
+            margin: 0 10px 20px;
+        }
+        #copyText { background: darkblue; }
+        #copyText:hover { background: blue; }
+        #reset { background: darkred; }
+        #reset:hover { background: red; }
+
+        .ta-l {
+            text-align: left;
+            background: white;
+            width: auto;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .text-box {
+            margin-bottom: 65px;
+        }
+
+        .tooltip {
+            position: relative;
+            /*display: inline-block;*/
+            margin: 0 auto;
+        }
+
+        .tooltip .tooltiptext {
+            /*visibility: hidden;*/
+            width: 140px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 6px;
+            left: 50%;
+            margin-left: -75px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+        .tooltip .tooltiptext.visible {
+            opacity: 1;
+        }
+
+
+        .flag {
+            width: 70px;
+            height: 46px;
+            vertical-align: middle;
+        }
+
+        li {
+            margin: 20px 0;
+            list-style: decimal;
+        }
+
+        a {
+            text-decoration: none
+        }
+
+        body
+        {
+            font-size: 1em;
+            font-family: arial;
+        }
+
+        img {max-width: 100%;}
+
+        th {
+            text-transform: uppercase;
+            /*font-size: 12px;*/
+            font-weight: normal;
+            color: white;
+            background: #808000;
+        }
+        td {
+            text-align: center;
+            font-size: 30px;
+            /*width: 80px;*/
+        }
+
+
+        p a {
+            color: burlywood;
+            font-size: 16px;
+            text-shadow: 1px 1px 4px black;
+        }
+        div#google_translate_element {
+            margin-bottom: -34px;
+        }
+    </style>
+
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <script src="assets/jquery.min.js"></script>
+
+    <script>
+        $(document).on('click', '.copy', function(e) {
+            var text = $(this).text();
+            text = text.replaceAll('ـ', '');
+
+            $("#copy").show().val( $("#copy").val() +''+ text );
+
+            var transcription = $(this).data('character');
+            transcription = transcription.replaceAll('ـ', '');
+
+            $("#transcription").val( $("#transcription").val() +''+ transcription );
+        });
+
+        $(document).on('mouseenter', '.copy', function(e) {
+            var text = $(this).text();
+            $("#zoomedChar").text(text);
+            $("#zoomedChar").addClass("visible");
+
+            audios[ $(this).data('character') ].play();
+        });
+
+        $(document).on('mouseleave', '.copy', function(e) {
+            $("#zoomedChar").removeClass("visible");
+        });
+
+        $(document).on('click', '.letra', function(e) {
+            let som = $(this).data('audio');
+            audios[som].play();
+        });
+
+        $(document).on('click', '#reset', function(e) {
+            $("#copy").val('');
+            $("#transcription").val('');
+        });
+
+        $(document).on('click', '#copyText', function(e) {
+            $("#copy").select();
+            document.execCommand("copy");
+            $(".tooltiptext").text('Copiado!');
+            $(".tooltiptext").addClass('visible');
+            setTimeout(function(){
+                $(".tooltiptext").removeClass('visible');
+            }, 3000);
+        });
+
+        $(document).ready(function(){
+            const queryString = window.location.search;
+            let lang = findGetParameter('idioma')
+            localStorage.setItem('idioma', lang);
+        });
+
+        function findGetParameter(parameterName) {
+            var result = null,
+                tmp = [];
+            var items = location.search.substr(1).split("&");
+            for (var index = 0; index < items.length; index++) {
+                tmp = items[index].split("=");
+                if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+            }
+            return result;
+        }
+
+        /* Fonte: http://www.sf.airnet.ne.jp/~ts/japanese/cover.html */
+        var audios = [];
+        audios['a']  = new Audio('assets/audio/japanese/a.wav');
+        audios['i']  = new Audio('assets/audio/japanese/i.wav');
+        audios['u']  = new Audio('assets/audio/japanese/u.wav');
+        audios['e']  = new Audio('assets/audio/japanese/e.wav');
+        audios['o']  = new Audio('assets/audio/japanese/o.wav');
+        audios['ka'] = new Audio('assets/audio/japanese/ka.wav');
+        audios['ki'] = new Audio('assets/audio/japanese/ki.wav');
+        audios['ku'] = new Audio('assets/audio/japanese/ku.wav');
+        audios['ke'] = new Audio('assets/audio/japanese/ke.wav');
+        audios['ko'] = new Audio('assets/audio/japanese/ko.wav');
+        audios['ga'] = new Audio('assets/audio/japanese/ga.wav');
+        audios['gi'] = new Audio('assets/audio/japanese/gi.wav');
+        audios['gu'] = new Audio('assets/audio/japanese/gu.wav');
+        audios['ge'] = new Audio('assets/audio/japanese/ge.wav');
+        audios['go'] = new Audio('assets/audio/japanese/go.wav');
+        audios['sa'] = new Audio('assets/audio/japanese/sa.wav');
+        audios['si'] = new Audio('assets/audio/japanese/si.wav');
+        audios['su'] = new Audio('assets/audio/japanese/su.wav');
+        audios['se'] = new Audio('assets/audio/japanese/se.wav');
+        audios['so'] = new Audio('assets/audio/japanese/so.wav');
+        audios['za'] = new Audio('assets/audio/japanese/za.wav');
+        audios['zi'] = new Audio('assets/audio/japanese/zi.wav');
+        audios['zu'] = new Audio('assets/audio/japanese/zu.wav');
+        audios['ze'] = new Audio('assets/audio/japanese/ze.wav');
+        audios['zo'] = new Audio('assets/audio/japanese/zo.wav');
+        audios['ta'] = new Audio('assets/audio/japanese/ta.wav');
+        audios['ti'] = new Audio('assets/audio/japanese/ti.wav');
+        audios['tu'] = new Audio('assets/audio/japanese/tu.wav');
+        audios['te'] = new Audio('assets/audio/japanese/te.wav');
+        audios['to'] = new Audio('assets/audio/japanese/to.wav');
+        audios['da'] = new Audio('assets/audio/japanese/da.wav');
+        audios['di'] = new Audio('assets/audio/japanese/zi.wav');
+        audios['du'] = new Audio('assets/audio/japanese/zu.wav');
+        audios['de'] = new Audio('assets/audio/japanese/de.wav');
+        audios['do'] = new Audio('assets/audio/japanese/do.wav');
+        audios['na'] = new Audio('assets/audio/japanese/na.wav');
+        audios['ni'] = new Audio('assets/audio/japanese/ni.wav');
+        audios['nu'] = new Audio('assets/audio/japanese/nu.wav');
+        audios['ne'] = new Audio('assets/audio/japanese/ne.wav');
+        audios['no'] = new Audio('assets/audio/japanese/no.wav');
+        audios['ha'] = new Audio('assets/audio/japanese/ha.wav');
+        audios['hi'] = new Audio('assets/audio/japanese/hi.wav');
+        audios['hu'] = new Audio('assets/audio/japanese/hu.wav');
+        audios['he'] = new Audio('assets/audio/japanese/he.wav');
+        audios['ho'] = new Audio('assets/audio/japanese/ho.wav');
+        audios['ba'] = new Audio('assets/audio/japanese/ba.wav');
+        audios['bi'] = new Audio('assets/audio/japanese/bi.wav');
+        audios['bu'] = new Audio('assets/audio/japanese/bu.wav');
+        audios['be'] = new Audio('assets/audio/japanese/be.wav');
+        audios['bo'] = new Audio('assets/audio/japanese/bo.wav');
+        audios['pa'] = new Audio('assets/audio/japanese/pa.wav');
+        audios['pi'] = new Audio('assets/audio/japanese/pi.wav');
+        audios['pu'] = new Audio('assets/audio/japanese/pu.wav');
+        audios['pe'] = new Audio('assets/audio/japanese/pe.wav');
+        audios['po'] = new Audio('assets/audio/japanese/po.wav');
+        audios['ma'] = new Audio('assets/audio/japanese/ma.wav');
+        audios['mi'] = new Audio('assets/audio/japanese/mi.wav');
+        audios['mu'] = new Audio('assets/audio/japanese/mu.wav');
+        audios['me'] = new Audio('assets/audio/japanese/me.wav');
+        audios['mo'] = new Audio('assets/audio/japanese/mo.wav');
+        audios['ya'] = new Audio('assets/audio/japanese/ya.wav');
+        // audios['yi'] = new Audio('assets/audio/japanese/yi.wav');
+        audios['yu'] = new Audio('assets/audio/japanese/yu.wav');
+        // audios['ye'] = new Audio('assets/audio/japanese/ye.wav');
+        audios['yo'] = new Audio('assets/audio/japanese/yo.wav');
+        audios['ra'] = new Audio('assets/audio/japanese/ra.wav');
+        audios['ri'] = new Audio('assets/audio/japanese/ri.wav');
+        audios['ru'] = new Audio('assets/audio/japanese/ru.wav');
+        audios['re'] = new Audio('assets/audio/japanese/re.wav');
+        audios['ro'] = new Audio('assets/audio/japanese/ro.wav');
+        audios['wa'] = new Audio('assets/audio/japanese/wa.wav');
+        // audios['wi'] = new Audio('assets/audio/japanese/wi.wav');
+        // audios['wu'] = new Audio('assets/audio/japanese/wu.wav');
+        // audios['we'] = new Audio('assets/audio/japanese/we.wav');
+        audios['wo'] = new Audio('assets/audio/japanese/wo.wav');
+        audios['n']  = new Audio('assets/audio/japanese/n.wav');
+    </script>
+</head>
+
+<body>
+    <br>
+    <p>
+        <a href="index.html" title="Seleção de idioma">Idiomas</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="introducao-russo.html" title="Introdução ao idioma">Introdução</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="caracteres.html" title="Memorização de Caracteres">Caracteres</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="vocabulario.html" title="Treino de Vocabulário">Vocabulário</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="desenho.html" title="Treino de Escrita">Escrita</a>
+    </p>
+    <span id="zoomedChar"></span>
+    <br>
+
+    <table>
+        <caption>Hiragana</caption>
+        <tbody>
+            <tr>
+                <th></th>
+                <th>a</th>
+                <th>i</th>
+                <th>u</th>
+                <th>e</th>
+                <th>o</th>
+            </tr>
+
+            <tr>
+                <th title="No lead consonant">∅</th>
+                <td class="copy" data-character="a">あ</td>
+                <td class="copy" data-character="i">い</td>
+                <td class="copy" data-character="u">う</td>
+                <td class="copy" data-character="e">え</td>
+                <td class="copy" data-character="o">お</td>
+            </tr>
+            <tr>
+                <th>k</th>
+                <td class="copy" data-character="ka">か</td>
+                <td class="copy" data-character="ki">き</td>
+                <td class="copy" data-character="ku">く</td>
+                <td class="copy" data-character="ke">け</td>
+                <td class="copy" data-character="ko">こ</td>
+            </tr>
+            <tr>
+                <th>g</th>
+                <td class="copy" data-character="ga">が</td>
+                <td class="copy" data-character="gi">ぎ</td>
+                <td class="copy" data-character="gu">ぐ</td>
+                <td class="copy" data-character="ge">げ</td>
+                <td class="copy" data-character="go">ご</td>
+            </tr>
+            <tr>
+                <th>s</th>
+                <td class="copy" data-character="sa">さ</td>
+                <td class="copy" data-character="si">し</td>
+                <td class="copy" data-character="su">す</td>
+                <td class="copy" data-character="se">せ</td>
+                <td class="copy" data-character="so">そ</td>
+            </tr>
+            <tr>
+                <th>z</th>
+                <td class="copy" data-character="za">ざ</td>
+                <td class="copy" data-character="zi">じ</td>
+                <td class="copy" data-character="zu">ず</td>
+                <td class="copy" data-character="ze">ぜ</td>
+                <td class="copy" data-character="zo">ぞ</td>
+            </tr>
+            <tr>
+                <th>t</th>
+                <td class="copy" data-character="ta">た</td>
+                <td class="copy" data-character="ti">ち</td>
+                <td class="copy" data-character="tu">つ</td>
+                <td class="copy" data-character="te">て</td>
+                <td class="copy" data-character="to">と</td>
+            </tr>
+            <tr>
+                <th>d</th>
+                <td class="copy" data-character="da">だ</td>
+                <td class="copy" data-character="di">ぢ</td>
+                <td class="copy" data-character="du">づ</td>
+                <td class="copy" data-character="de">で</td>
+                <td class="copy" data-character="do">ど</td>
+            </tr>
+            <tr>
+                <th>n</th>
+                <td class="copy" data-character="na">な</td>
+                <td class="copy" data-character="ni">に</td>
+                <td class="copy" data-character="nu">ぬ</td>
+                <td class="copy" data-character="ne">ね</td>
+                <td class="copy" data-character="no">の</td>
+            </tr>
+            <tr>
+                <th>h</th>
+                <td class="copy" data-character="ha">は</td>
+                <td class="copy" data-character="hi">ひ</td>
+                <td class="copy" data-character="hu">ふ</td>
+                <td class="copy" data-character="he">へ</td>
+                <td class="copy" data-character="ho">ほ</td>
+            </tr>
+            <tr>
+                <th>b</th>
+                <td class="copy" data-character="ba">ば</td>
+                <td class="copy" data-character="bi">び</td>
+                <td class="copy" data-character="bu">ぶ</td>
+                <td class="copy" data-character="be">べ</td>
+                <td class="copy" data-character="bo">ぼ</td>
+            </tr>
+            <tr>
+                <th>p</th>
+                <td class="copy" data-character="pa">ぱ</td>
+                <td class="copy" data-character="pi">ぴ</td>
+                <td class="copy" data-character="pu">ぷ</td>
+                <td class="copy" data-character="pe">ぺ</td>
+                <td class="copy" data-character="po">ぽ</td>
+            </tr>
+            <tr>
+                <th>m</th>
+                <td class="copy" data-character="ma">ま</td>
+                <td class="copy" data-character="mi">み</td>
+                <td class="copy" data-character="mu">む</td>
+                <td class="copy" data-character="me">め</td>
+                <td class="copy" data-character="mo">も</td>
+            </tr>
+            <tr>
+                <th>y</th>
+                <td class="copy" data-character="ya">や</td>
+                <td>&nbsp;</td>
+                <td class="copy" data-character="yu">ゆ</td>
+                <td>&nbsp;</td>
+                <td class="copy" data-character="yo">よ</td>
+            </tr>
+            <tr>
+                <th>r</th>
+                <td class="copy" data-character="ra">ら</td>
+                <td class="copy" data-character="ri">り</td>
+                <td class="copy" data-character="ru">る</td>
+                <td class="copy" data-character="re">れ</td>
+                <td class="copy" data-character="ro">ろ</td>
+            </tr>
+            <tr>
+                <th>w</th>
+                <td class="copy" data-character="wa">わ</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td class="copy" data-character="wo">を</td>
+            </tr>
+            <tr>
+                <td colspan="6" class="copy" data-character="n">ん</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <caption>Katakana</caption>
+        <tbody>
+            <tr>
+                <th></th>
+                <th>a</th>
+                <th>i</th>
+                <th>u</th>
+                <th>e</th>
+                <th>o</th>
+            </tr>
+
+            <tr>
+                <th title="No lead consonant">∅</th>
+                <td class="copy" data-character="a">ア</td>
+                <td class="copy" data-character="i">イ</td>
+                <td class="copy" data-character="u">ウ</td>
+                <td class="copy" data-character="e">エ</td>
+                <td class="copy" data-character="o">オ</td>
+            </tr>
+            <tr>
+                <th>k</th>
+                <td class="copy" data-character="ka">カ</td>
+                <td class="copy" data-character="ki">キ</td>
+                <td class="copy" data-character="ku">ク</td>
+                <td class="copy" data-character="ke">ケ</td>
+                <td class="copy" data-character="ko">コ</td>
+            </tr>
+            <tr>
+                <th>g</th>
+                <td class="copy" data-character="ga">が</td>
+                <td class="copy" data-character="gi">ぎ</td>
+                <td class="copy" data-character="gu">ぐ</td>
+                <td class="copy" data-character="ge">げ</td>
+                <td class="copy" data-character="go">ご</td>
+            </tr>
+            <tr>
+                <th>s</th>
+                <td class="copy" data-character="sa">サ</td>
+                <td class="copy" data-character="si">シ</td>
+                <td class="copy" data-character="su">ス</td>
+                <td class="copy" data-character="se">セ</td>
+                <td class="copy" data-character="so">ソ</td>
+            </tr>
+            <tr>
+                <th>z</th>
+                <td class="copy" data-character="za">ざ</td>
+                <td class="copy" data-character="zi">じ</td>
+                <td class="copy" data-character="zu">ず</td>
+                <td class="copy" data-character="ze">ぜ</td>
+                <td class="copy" data-character="zo">ぞ</td>
+            </tr>
+            <tr>
+                <th>t</th>
+                <td class="copy" data-character="ta">タ</td>
+                <td class="copy" data-character="ti">チ</td>
+                <td class="copy" data-character="tu">ツ</td>
+                <td class="copy" data-character="te">テ</td>
+                <td class="copy" data-character="to">ト</td>
+            </tr>
+            <tr>
+                <th>d</th>
+                <td class="copy" data-character="da">ダ</td>
+                <td class="copy" data-character="di">ヂ</td>
+                <td class="copy" data-character="du">ヅ</td>
+                <td class="copy" data-character="de">デ</td>
+                <td class="copy" data-character="do">ド</td>
+            </tr>
+            <tr>
+                <th>n</th>
+                <td class="copy" data-character="na">ナ</td>
+                <td class="copy" data-character="ni">ニ</td>
+                <td class="copy" data-character="nu">ヌ</td>
+                <td class="copy" data-character="ne">ネ</td>
+                <td class="copy" data-character="no">ノ</td>
+            </tr>
+            <tr>
+                <th>h</th>
+                <td class="copy" data-character="ha">ハ</td>
+                <td class="copy" data-character="hi">ヒ</td>
+                <td class="copy" data-character="hu">フ</td>
+                <td class="copy" data-character="he">ヘ</td>
+                <td class="copy" data-character="ho">ホ</td>
+            </tr>
+            <tr>
+                <th>b</th>
+                <td class="copy" data-character="ba">バ</td>
+                <td class="copy" data-character="bi">ビ</td>
+                <td class="copy" data-character="bu">ブ</td>
+                <td class="copy" data-character="be">ベ</td>
+                <td class="copy" data-character="bo">ボ</td>
+            </tr>
+            <tr>
+                <th>p</th>
+                <td class="copy" data-character="pa">パ</td>
+                <td class="copy" data-character="pi">ピ</td>
+                <td class="copy" data-character="pu">プ</td>
+                <td class="copy" data-character="pe">ペ</td>
+                <td class="copy" data-character="po">ポ</td>
+            </tr>
+            <tr>
+                <th>m</th>
+                <td class="copy" data-character="ma">マ</td>
+                <td class="copy" data-character="mi">ミ</td>
+                <td class="copy" data-character="mu">ム</td>
+                <td class="copy" data-character="me">メ</td>
+                <td class="copy" data-character="mo">モ</td>
+            </tr>
+            <tr>
+                <th>y</th>
+                <td class="copy" data-character="ya">ヤ</td>
+                <td>&nbsp;</td>
+                <td class="copy" data-character="yu">ユ</td>
+                <td>&nbsp;</td>
+                <td class="copy" data-character="yo">ヨ</td>
+            </tr>
+            <tr>
+                <th>r</th>
+                <td class="copy" data-character="ra">ラ</td>
+                <td class="copy" data-character="ri">リ</td>
+                <td class="copy" data-character="ru">ル</td>
+                <td class="copy" data-character="re">レ</td>
+                <td class="copy" data-character="ro">ロ</td>
+            </tr>
+            <tr>
+                <th>w</th>
+                <td class="copy" data-character="wa">ワ</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td class="copy" data-character="wo">ヲ</td>
+            </tr>
+            <tr>
+                <td colspan="6" class="copy" data-character="n">ン</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <table>
+        <caption>Functional marks and diacritics</caption>
+        <tbody>
+            <tr>
+                <th colspan="6"></th>
+            </tr>
+            <tr>
+                <td>っ</td>
+                <td>ゝ</td>
+                <td colspan="2" title="Dakuten">゛</td>
+                <td colspan="2" title="Handakuten">゜</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="tooltip">
+        <span class="tooltiptext">Tooltip text</span>
+    </div>
+
+    <input id="transcription">
+    <textarea id="copy"></textarea>
+
+    <p>
+        <button id="copyText">Copiar</button>
+        <button id="reset">Limpar</button>
+    </p>
+
+
+    <div class="ta-l">
+        <h2>Gramática</h2>
+        <div class="text-box">
+            <p>O alfabeto japonês....</p>
+            https://pt.wikipedia.org/wiki/Kanji
+        </div>
+
+        <h2>História</h2>
+        <div class="text-box">
+            Existem dois silabários em japonês: hiragana e katakana. Alfabetos são feitos de caracteres que representam uma única letra, enquanto os silabários são feitos de caracteres que representam uma sílaba. Então, se você pegar o hiragana か por exemplo, você tem que romanizar como "ka". Veja como tem duas letras? (Uma nota rápida aqui: O termo real para essas “sílabas” em japonês é mora.
+
+            Em japonês, as sílabas japonesas são baseadas na quantidade de tempo necessária para dizê-las. Como cada kana é igual, eles recebem uma quantidade igual de tempo. Então os は e get têm sua própria batida em japonês, mesmo que nós os esmagemos juntos em inglês.
+
+            Ao estudar aventuras, você pode se deparar com personagens muito pequenos - cerca de metade do tamanho de um personagem normal. O japonês tem uma maneira interessante de combinar caracteres específicos para criar sons que não são representados pelos 46 caracteres básicos.
+
+            Há um número limitado deles, e eles não são muito difíceis de se acostumar, porque são bastante consistentes. Você pode combinar todos os personagens que terminam em "i" som (き, し, ち, etc.), exceto para い, com os três caracteres que começam com um som “y” (や, ゆ, よ).
+
+            Quando você fizer isso, o caractere "y" será escrito menor para indicar que está modificando o caractere antes dele e não está sozinho. Por exemplo, se você combinar き e や será escrito き ゃ e pronunciado “kya”. Você pode combinar ち e よ para fazer ち ょ ou “cho”.
+
+            Mas por que o つ é minúsculo?
+            Você deve ter notado que deixei de fora um personagem muito importante que você verá em sua forma minúscula com bastante frequência. Isso é porque trabalha de forma um pouco diferente em comparação com os outros personagens minúsculos.
+
+            Quando つ é escrito menor em uma palavra, indica uma parada. É como uma extensão do som consoante depois dele, mas literalmente não é expresso. É praticamente a ausência de voz quando você está falando.
+
+            Se olharmos para a palavra Surprise っ く り (surpresa), podemos ver como isso funciona. Ao contrário dos outros caracteres minúsculos, o pequeno つ é tecnicamente uma sílaba completa. Ele modifica o personagem depois de ter feito uma sílaba antes de dizê-lo. É difícil explicar isso digitando, então tente encontrá-lo em áudio ou através de um amigo que fala japonês. Mas eu farei o meu melhor.
+
+            A romanização de び っ く り é "bikkuri", e os kks duplos são o seu signo que tem que quebrar lá. Então, ao invés de dizer isso, você tem uma pequena pausa antes de chegar ao som de “k”. Mais ou menos como "bi-kuri".
+
+            A quantidade de tempo que você pausa em um pequeno つ pode adicionar ênfase. Se a sua pausa é normal, há pouca ênfase. Mas se você fizer uma pausa um pouco mais e disser mais como “bi-kuri!”, Isso dará mais ênfase. Não exagere com isso. Muito de uma pausa vai soar um pouco ridículo. Esta é uma daquelas coisas que escutam um falante nativo para pegar as coisas.
+
+            Small つ também pode ser usado por escrito para indicar o corte de uma palavra. Uma das palavras que vejo com mais é “え っ？” Isso não é realmente uma palavra, mas é usado para indicar confusão ou surpresa. O っ no final mostra que o som is é cortado para dar ênfase.
+
+
+            O que é Hiragana  mesmo?
+            Hiragana (平仮名) é um dos alfabetos silábicos (silabário) da língua japonesa. É usado para todas as palavras para as quais não exista kanji, ou este exista mas seja pouco usado. Também é usado nas terminações dos verbos e dos adjetivos.
+            Os japoneses indicam historicamente que o hiragana contemporâneo é uma derivação do Kanji utilizado no período Heian (749 D.C.-1185 D.C.).Esta derivação surgiu como uma simplificação manual dos kanjis mais difundidos fonéticamente entre os que podiam ler e escrever na época.
+            A caligrafia empregada deixou de ser letras de traços retos e definidos, adotando o estilo cursivo, o chamado sôsho-tai, criado na China. Porém, no Japão, o estilo foi adquirindo características próprias, “simplificando” de tal forma os kanji a ponto de ficarem bem diferentes das letras originais. Desse estilo cursivo “simplificado”, nasceu o hiragana. Assim, o hiragana é um conjunto de letras mais curvilíneas.
+
+
+
+
+            O que é Katakana mesmo?
+            O katakana (片仮名, katakana) é um dos silabários empregados na escrita japonesa junto com o hiragana. Se atribui sua invenção ao monge Kibino Makibi por volta de 665~775 D.C.
+            Assim como o hiragana, o katakana também foi criado a partir dos kanji, mas possui características diferentes. O katakana surgiu como sinais gráficos para auxiliar na leitura de textos chineses. Estes caracteres, ao contrário dos kanji, não têm nenhum valor conceitual, senão unicamente fonético. Graficamente apresentam uma forma angular e geométrica.
+
+            Mas como definiram a fonetica de cada caractere para o ocidente?
+            Foi desenvolvido o Romaji o qual é empregado na transcrição fonética da língua japonesa para o alfabeto latino (romano).
+            O primeiro sistema de romanização do japonês baseava-se na ortografia da Língua Portuguesa. Foi desenvolvido por volta de 1548 por um católico japonês de nome Yajiro.
+            Depois da expulsão dos cristãos do Japão no início do século XVII, o rōmaji perdeu o uso e era apenas utilizado esporadicamente em textos estrangeiros até meados do século XIX, quando o Japão se abriu novamente. Os sistemas usados atualmente foram desenvolvidos na segunda metade do século XIX. Em 1859 o médico americano James Curtis Hepburn, viajou para o Japão e por lá abriu sua clínica e uma escola, inicou a compilação de um dicionário Inglês-Japonês que foi publicado em 1867. Apesar dele não ser o inventor do sistema, foi através dele que o sistema se popularizou.
+
+
+
+            Os Sons Modificados
+            Uma vez que você memorize todos os caracteres do hiragana, você acabou de aprender o alfabeto, mas não todos os sons. Há mais cinco possíveis sons que são possíveis colocando duas pequenas linhas, parecidas com as aspas, chamadas dakuten ou um pequeno circulo chamado handakuten. Isto essencialmente cria um som modificado da consoante.
+            Todas as possíveis combinações dos sons modificados são dados na tabela abaixo.
+
+
+            G
+
+
+            Os 「や」、「ゆ」、e 「よ」Pequenos
+            Você pode também combinar uma consoante com um som / ya / yu / yo / colocando um pequeno「や」、「ゆ」、ou 「よ」 em cada consoante nos caracteres com a vogal / i /.
+
+
+
+            Hiragana é o alfabeto fonético básico do Japonês. Ele representa todos os sons na língua Japonesa. Portanto, você pode teoricamente escrever tudo em hiragana. No entanto, como o Japonês é escrito sem nenhum espaço, isto irá criar praticamente um texto indecifrável
+
+
+
+            Aqui está uma tabela e os sons correspondentes à pronúncia em Português. Ele é lido de cima para baixo e da direita para a esquerda, no qual é como a maioria dos livros japoneses são escritos. Em Japonês, escrever com a ordem e direção dos traços é importante, especialmente para os kanji. Como as letras escritas à mão são um pouco diferente das letras comerciais (assim como o “a” é diferente do “a” escrito a mão) você irá querer procurar uma fonte como um website ou um livro que mostre como os caracteres são escritos. Eu também devo enfatizar a importância da pronúncia correta de cada som, já que todas as palavras em Japonês são compostas por estes sons, aprender uma pronúncia incorreta de uma letra pode prejudicar seriamente sua fundação, na qual sua pronúncia se baseia.
+
+
+            Os Sons Modificados
+            Uma vez que você memorize todos os caracteres do hiragana, você acabou de aprender o alfabeto, mas não todos os sons. Há mais cinco possíveis sons que são possíveis colocando duas pequenas linhas, parecidas com as aspas, chamadas dakuten （濁点）ou um pequeno circulo chamado handakuten （半濁点）. Isto essencialmente cria um som modificado da consoante (tecnicamente chamada uma consoante sonora ou「濁り」, que literalmente significa se tornar lamacento.
+            Todas as possíveis combinações dos sons modificados são dados na tabela abaixo.
+
+            p
+            b
+            d
+            z
+            g
+
+
+
+
+            Usos do Katakana
+            O katakana é usado para escrever nomes comuns e próprios de origem estrangeira, principalmente ocidental, onomatopéias, palavras técnicas, gírias e nomes científicos de plantas e animais. As onomatopéias escritas em katakana estão muito presentes na língua japonesa - nas histórias em quadrinhos (mangás), elas são frequentemente usadas para representar o som da chuva, palmas, socos.[2]
+
+            Escrever palavras originadas de outros idiomas, conhecidas no Japão como gairaigo (外来語), inicialmente do português e do holandês nos séculos 16 e 17 e, a partir da Restauração Meiji, em sua maioria do inglês. Por exemplo, "televisão" é lido terebi, do inglês television (テレビ, terebi);[3]
+            Onomatopéias, por exemplo pinpon (ピンポン, pinpon), o "ding-dong", som de uma campainha;
+            Usado para termos científicos como nomes de animais, plantas, minerais, entre outros;
+            Enfatizar palavras. Por exemplo, é comum ver ココ koko (aqui), ゴミ gomi (lixo) ou メガネ megane (óculos).
+
+
+
+            Marca de extensão de vogal
+
+            Em katakana se representa uma vogal extensa a partir de um traço largo chamado chōon (ー na escrita horizontal, ｜ na escrita vertical).
+
+            Se a palavra é japonesa, também pode-se formar as extensões de forma análoga a como se faz em hiragana:
+
+            Exemplos:
+
+            ミスター (misutaa, mister)
+            スーパーマーケット (suupaamaaketto, do inglês supermarket, supermercado)
+            ショーイチ (Shōichi, apesar de que se normalmente se escreveria em kanji ou hiragana).
+            Consoante geminada
+
+            Um pequeno tsu ッ chamado sokuon indica uma consoante geminada, que é representada em rōmaji dobrando a consoante seguinte. Por exemplo, cama é escrito em katakana com uma consoante geminada, ベッド (beddo), que se origina do inglês bed. A pronúncia é feita criando uma pausa entre os kanas envolvidos na duplicação consonantal.
+
+
+            <table border="1" cellpadding="8">
+            <caption>Exemplos de Palavras em Katakana</caption>
+            <tbody>
+            <tr>
+            <td><strong>Português</strong></td>
+            <td><strong>Inglês</strong></td>
+            <td><strong>Japonês</strong></td>
+            </tr>
+            <tr>
+            <td>América</td>
+            <td>America</td>
+            <td>アメリカ</td>
+            </tr>
+            <tr>
+            <td>Rússia</td>
+            <td>Russia</td>
+            <td>ロシア</td>
+            </tr>
+            <tr>
+            <td>Trapacear</td>
+            <td>cheating</td>
+            <td>カンニング (cunning)</td>
+            </tr>
+            <tr>
+            <td>Viagem</td>
+            <td>tour</td>
+            <td>ツアー</td>
+            </tr>
+            <tr>
+            <td>Funcionário</td>
+            <td>company employee</td>
+            <td>サラリーマン (salary man)</td>
+            </tr>
+            <tr>
+            <td>Mozart</td>
+            <td>Mozart</td>
+            <td>モーツァルト</td>
+            </tr>
+            <tr>
+            <td>Buzina de Carro</td>
+            <td>car horn</td>
+            <td>クラクション (klaxon)</td>
+            </tr>
+            <tr>
+            <td>sofá</td>
+            <td>sofa</td>
+            <td>ソファ or ソファー</td>
+            </tr>
+            <tr>
+            <td>Dia das Bruxas</td>
+            <td>Halloween</td>
+            <td>ハロウィーン</td>
+            </tr>
+            <tr>
+            <td>Batatas fritas</td>
+            <td>French fries</td>
+            <td>フライドポテト (fried potato)</td>
+            </tr>
+            </tbody>
+            </table>
+
+            Os kanji (漢字) são caracteres da língua japonesa adquiridos a partir de caracteres chineses, da época da Dinastia Han, que se utilizam para escrever japonês junto com os caracteres silabários japoneses katakana e hiragana.
+
+            No mundo ocidental, kanji, também é sinónimo de ideograma. Sempre foi muito utilizado na caligrafia para tatuagens. Devido ao imenso e variável número de kanji, o ministério da educação japonês definiu, em 10 de outubro de 1981, a jōyō kanji, uma lista de kanji oficiais, distribuídos por ordem de traços, de 1 até 23.
+
+
+
+
+
+
+
+            Ideogramas
+            Os kanjis são ideogramas que expressam coisas concretas e abstratas, através de radicais (partes indivisíveis dos kanjis) que dão a sugestão de que somadas formam a palavra (às vezes o radical é o próprio kanji, ou a palavra é formada por mais de um kanji). Há três tipos de kanjis:
+
+            Pictográficos: São desenhos de objetos e fenômenos do cotidiano. Exemplos:
+
+
+            <ul><li>火　(Fogo. A lenha em chamas levantando labaredas para o alto)</li>
+            <li>日 (Sol. O traço do meio representa a estrela em si, e o quadrado ladeador, seu brilho)</li>
+            <li>月　(Lua. A esfera com a parte esquerda oculta pela sombra)</li>
+            <li>川 (Rio. Os traços ilustram as curvas formadas pela correnteza)</li>
+            <li>雨　(Chuva. Gotas caem do alto)</li>
+            <li>人　(Pessoa. Duas pernas)</li>
+            <li>木　(Árvore. Evidencia a árvore e suas principais ramificações)</li>
+            <li>鳥　(Pássaro. Está de perfil, a cabeça tem uma pluma rebelde e está voltada para esquerda. abaixo, a asa seguida das garras ou patas)</li>
+            <li>馬　(Cavalo. De perfil, seu pescoço e cabeça voltados para esquerda. Traços horizontais formam a crina, e os inferiores suas patas e parte traseira-inferior o rabo)</li>
+            <li>龍　(Dragão. Do lado esquerdo temos sua face. A partir da padronização de caligrafia　<a href="/w/index.php?title=Reisho&amp;action=edit&amp;redlink=1" class="new" title="Reisho (página não existe)">reisho</a> (隸書) em diante (sem passar para as formas cursivas), sua boca e bigode se assemelham com o radicais "lua" ou "carne", mas não o são, porque este kanji é um radical por si só. No Japão, foi substituído por 竜 mas ainda é razoavelmente utilizado.)</li></ul>
+
+
+
+            Ideográficos: Representam o abstrato (sentimentos, ideias, números, etc.) Exemplos:
+
+            一
+
+            <ul><li>一 (um. um traço horizontal simboliza a "unidade")</li>
+            <li>二 (dois. dois traços, duas unidades)</li>
+            <li>三 (três traços, três unidades)</li>
+            <li>四 (quatro. Uma "caixa" 囗 com quatro cantos com os "membros humanos" (儿) que são quatro.)</li>
+            <li>上 (em cima/superior. O traço menor está acima da superfície)</li>
+            <li>下 (em baixo/inferior. O traço menor está abaixo da superfície)</li></ul>
+
+            Complexos: Existem dois tipos:
+
+            <ul><li>明 (claridade. É formado pela combinação dos radicais 日(sol) e 月(lua)</li>
+            <li>林 (bosque. É composto de dois radicais 木(árvore)</li>
+            <li>森 (floresta. É formado por três radicais 木(árvore)</li>
+            <li>男 (homem. É representado como "a força (力) e campos de arroz (田)"</li>
+            <li>休 (descansar. A pessoa (人) numa árvore (木), relaxando.)</li>
+            <li>好 (carinho, gostar. É o que a mulher (女) sente pelo filho (子).)</li></ul>
+
+
+
+
+            Quando usar cada leitura
+            Mesmo palavras com conceitos similares, como "leste" (東）, "norte" (北) e "nordeste"(東北), podem ter leituras completamente diferentes: "higashi" e "kita", leituras "kun", são usadas nas duas primeiras, respectivamente; a terceira lê-se usando o on'yomi: "touhoku".
+
+            A principal regra para determinar a leitura e pronúncia de um kanji em um determinado contexto é que kanjis aparecendo em compostos são normalmente lidos usando o "on'yomi". Esses compostos são chamados "jukugo"(熟語) em japonês. Por exemplo, 情報 jōhō/jouhou "informação", 学校　gakkō/gakkou "escola", e 新幹線 shinkansen "trem-bala", todos seguem este padrão.
+
+            Kanjis que aparecem isolados—ou seja, escritos adjacentes a kana (hiragana e katakana) somente, não a outros kanjis—são normalmente lidos usando seu "kun'yomi". Juntos ao seu okurigana, caso o possuam, eles normalmente funcionam como um substantivo ou como um verbo ou adjetivo flexionados. Por exemplo: 月 tsuki "lua", 情け nasake "simpatia", 赤い akai "vermelho" (adj), 新しい atarashii "novo", 見る miru "ver".
+
+            Há um terceiro tipo de leitura, na qual os kanjis são lidos pelo significado conjunto, ignorando-se as pronúncias "on" e "kun" de cada um deles isoladamente. Como um exemplo, veja a palavra para "adulto", que é 大人, que consiste dos kanjis 大 (grande) e 人 (pessoa). Contudo, a leitura não é "daijin" nem "oohito" como poderia se esperar das leituras "on" e "kun", mas sim "otona", pois essa é a palavra japonesa para "adulto".
+
+        </div>
+    </div>
+    <br>
+    <br>
+
+    <div id="google_translate_element"></div>
+
+    <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+    }
+    </script>
+
+    <!-- <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
+    <script type="text/javascript">
+        (function(){var gtConstEvalStartTime = new Date();/*
+
+         Copyright The Closure Library Authors.
+         SPDX-License-Identifier: Apache-2.0
+        */
+        function d(b){var a=document.getElementsByTagName("head")[0];a||(a=document.body.parentNode.appendChild(document.createElement("head")));a.appendChild(b)}function _loadJs(b){var a=document.createElement("script");a.type="text/javascript";a.charset="UTF-8";a.src=b;d(a)}function _loadCss(b){var a=document.createElement("link");a.type="text/css";a.rel="stylesheet";a.charset="UTF-8";a.href=b;d(a)}function _isNS(b){b=b.split(".");for(var a=window,c=0;c<b.length;++c)if(!(a=a[b[c]]))return!1;return!0}
+        function _setupNS(b){b=b.split(".");for(var a=window,c=0;c<b.length;++c)a.hasOwnProperty?a.hasOwnProperty(b[c])?a=a[b[c]]:a=a[b[c]]={}:a=a[b[c]]||(a[b[c]]={});return a}window.addEventListener&&"undefined"==typeof document.readyState&&window.addEventListener("DOMContentLoaded",function(){document.readyState="complete"},!1);
+        if (_isNS('google.translate.Element')){return}(function(){var c=_setupNS('google.translate._const');c._cest = gtConstEvalStartTime;gtConstEvalStartTime = undefined;c._cl='en';c._cuc='googleTranslateElementInit';c._cac='';c._cam='';c._ctkk='444784.3169828605';var h='translate.googleapis.com';var s=(true?'https':window.location.protocol=='https:'?'https':'http')+'://';var b=s+h;c._pah=h;c._pas=s;c._pbi=b+'/translate_static/img/te_bk.gif';c._pci=b+'/translate_static/img/te_ctrl3.gif';c._pli=b+'/translate_static/img/loading.gif';c._plla=h+'/translate_a/l';c._pmi=b+'/translate_static/img/mini_google.png';c._ps=b+'/translate_static/css/translateelement.css';c._puh='translate.google.com';_loadCss(c._ps);_loadJs(b+'/translate_static/js/element/main.js');})();})();
+    </script>
+</body></html>

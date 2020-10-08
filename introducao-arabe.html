@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171185330-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-171185330-2');
+    </script>
+    <!-- controle de volume -->
+    <!-- sentence generator -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Introdução ao idioma Árabe</title>
+    <link rel="shortcut icon" href="assets/iconfinder_Arab League_15797.png" />
+    <style type="text/css">
+        body {
+            margin: 0 auto;
+            text-align: center;
+            background: transparent;
+        }
+
+        html {
+            border: 60px solid;
+            height: fit-content !important;
+            background-color: antiquewhite;
+
+            /*border-image: url("assets/arc.png") 188 109 / 51px 35px / 0rem round;*/
+            border-image: url("assets/arc.png") 203 173 / 90px 79px / 0rem round;
+            /*border-image: url("assets/arc.png") 178 166 / 90px 79px / 0rem round;*/
+            /*border-image: url("assets/arc.png") 140 262 / 65px 86px / 0px 0px round;*/
+            /*border-image: url("assets/arc.png") 163 163 / 70px 59px / 0rem round;*/
+        }
+
+        table {
+            border: 2px silver double;
+            display: inline-block;
+            background: white;
+            z-index: 9999;
+
+            border-collapse: collapse;
+            font-family: arial;
+            margin: 0 10px;
+        }
+
+        /*td:nth-child(1) { width: 30px; }*/
+        td:nth-child(2) {  text-align: left; width: 61px;}
+
+        th {
+            font-weight: normal;
+            color: white;
+            background: #808000;
+            padding: 0 5px;
+            font-size: 16px;
+            padding: 0 5px;
+        }
+        td {
+            text-align: center;
+            margin: 2px 10px;
+            padding: 1px 10px;
+        }
+
+
+        td.copy {
+            width: 35px;
+            opacity: .9; /* corrige problema de hover e z-index do zoomedChar */
+            color: #222;
+            font-size: 20px;
+        }
+        td.copy:hover {color: black; text-shadow: 1px 1px 2px white;}
+
+        tbody tr:nth-child(odd) { background-color: #ffd; }
+
+        tbody tr:hover { background: #dfd}
+
+        #transcription { margin: 10px 0; }
+        textarea {
+            display: inline-block;
+            width: 90%;
+            font-size: 70px;
+            height: 90px;
+            text-align: center;
+            vertical-align: middle;
+            text-shadow: 2px 2px 4px olive;
+            background: darkkhaki;
+        }
+
+        .copy,
+        .letra { cursor: pointer; }
+
+        #zoomedChar {
+            /*display: none;*/
+            position: fixed;
+            z-index: 0;
+            text-align: center;
+            border: 1px solid black;
+            background: rgba(0,0,0,.4);
+            margin: 0 auto;
+            top: 0;
+            right: 0;
+            left: 0;
+            transition: 0.7s;
+            /*transition: opacity 0.3s;*/
+
+            opacity: 0;
+            font-size: 0;
+            width: 0;
+            height: 0;
+
+            text-shadow: 2px 2px 5px lime;
+            vertical-align: top;
+        }
+
+        #zoomedChar.visible {
+            font-size: 30rem;
+            width: 90%;
+            opacity: 1;
+            line-height: 100%;
+            height: 100%;
+        }
+
+        .letra { color: blue; }
+        a:hover,
+        .letra:hover { text-decoration: underline }
+
+        [data-egoista='true'] {
+            color:red;
+            opacity: .1 !important;
+        }
+
+
+
+        #copyText,
+        #reset {
+            color: white;
+            cursor: pointer;
+            padding: 10px 0;
+            width: 90px;
+            margin: 0 10px 20px;
+        }
+        #copyText { background: darkblue; }
+        #copyText:hover { background: blue; }
+        #reset { background: darkred; }
+        #reset:hover { background: red; }
+
+        .ta-l {
+            text-align: left;
+            background: white;
+            width: auto;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .text-box {
+            margin-bottom: 65px;
+        }
+
+        .tooltip {
+            position: relative;
+            /*display: inline-block;*/
+            margin: 0 auto;
+        }
+
+        .tooltip .tooltiptext {
+            /*visibility: hidden;*/
+            width: 140px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 6px;
+            left: 50%;
+            margin-left: -75px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+        .tooltip .tooltiptext.visible {
+            opacity: 1;
+        }
+
+
+        .flag {
+            width: 70px;
+            height: 46px;
+            vertical-align: middle;
+        }
+
+        li {
+            margin: 20px 0;
+            list-style: decimal;
+        }
+
+        a {
+            text-decoration: none
+        }
+
+        body
+        {
+            font-size: 1em;
+            font-family: arial;
+        }
+
+        img {max-width: 100%;}
+
+        th {
+            text-transform: uppercase;
+            /*font-size: 12px;*/
+            font-weight: normal;
+            color: white;
+            background: #808000;
+        }
+        td {
+            text-align: center;
+            font-size: 30px;
+            /*width: 80px;*/
+        }
+
+
+        nav a {
+            color: burlywood;
+            font-size: 16px;
+            /*text-shadow: 1px 1px 4px black;*/
+        }
+        div#google_translate_element {
+            margin-bottom: 0;
+        }
+
+
+        th,
+        body,
+        td.portugues {
+            /*font-size: 14px;*/
+            font-family: arial;
+        }
+
+        td.portugues,
+        th {
+            font-size: 12px;
+        }
+    </style>
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <script src="assets/jquery.min.js"></script>
+
+    <script>
+        $(document).on('click', '.copy', function(e) {
+            var text = $(this).text();
+            text = text.replaceAll('ـ', '');
+
+            $("#copy").show().val( $("#copy").val() +''+ text );
+
+            var transcription = $(this).data('character');
+            transcription = transcription.replaceAll('ـ', '');
+
+            $("#transcription").val( $("#transcription").val() +''+ transcription );
+        });
+
+        $(document).on('mouseenter', '.copy', function(e) {
+            var text = $(this).text();
+            $("#zoomedChar").text(text);
+            $("#zoomedChar").addClass("visible");
+        });
+
+        $(document).on('mouseleave', '.copy', function(e) {
+            $("#zoomedChar").removeClass("visible");
+        });
+
+        $(document).on('click', '.letra', function(e) {
+            let som = $(this).data('audio');
+            audios[som].play();
+        });
+
+        $(document).on('click', '#reset', function(e) {
+            $("#copy").val('');
+            $("#transcription").val('');
+        });
+
+        $(document).on('click', '#copyText', function(e) {
+            $("#copy").select();
+            document.execCommand("copy");
+            $(".tooltiptext").text('Copiado!');
+            $(".tooltiptext").addClass('visible');
+            setTimeout(function(){
+                $(".tooltiptext").removeClass('visible');
+            }, 3000);
+
+        });
+
+        /* Fonte: https://lang_src.s3.amazonaws.com/yaa_a.mp3 */
+        var audios = [];
+        audios['alif_a']  = new Audio('assets/audio/alif_a.mp3');
+        audios['ayn_a']   = new Audio('assets/audio/ayn_a.mp3');
+        audios['baa_a']   = new Audio('assets/audio/baa_a.mp3');
+        audios['daad_a']  = new Audio('assets/audio/daad_a.mp3');
+        audios['daal_a']  = new Audio('assets/audio/daal_a.mp3');
+        audios['dhaa_a']  = new Audio('assets/audio/dhaa_a.mp3');
+        audios['dhaal_a'] = new Audio('assets/audio/dhaal_a.mp3');
+        audios['faa_a']   = new Audio('assets/audio/faa_a.mp3');
+        audios['ghayn_a'] = new Audio('assets/audio/ghayn_a.mp3');
+        audios['Haa_a1']  = new Audio('assets/audio/Haa_a1.mp3');
+        audios['haa_a2']  = new Audio('assets/audio/haa_a2.mp3');
+        audios['jiim_a']  = new Audio('assets/audio/jiim_a.mp3');
+        audios['kaaf_a']  = new Audio('assets/audio/kaaf_a.mp3');
+        audios['khaa_a']  = new Audio('assets/audio/khaa_a.mp3');
+        audios['laam_a']  = new Audio('assets/audio/laam_a.mp3');
+        audios['miim_a']  = new Audio('assets/audio/miim_a.mp3');
+        audios['nuun_a']  = new Audio('assets/audio/nuun_a.mp3');
+        audios['qaaf_a']  = new Audio('assets/audio/qaaf_a.mp3');
+        audios['raa_a']   = new Audio('assets/audio/raa_a.mp3');
+        audios['saad_a']  = new Audio('assets/audio/saad_a.mp3');
+        audios['shiin_a'] = new Audio('assets/audio/shiin_a.mp3');
+        audios['siin_a']  = new Audio('assets/audio/siin_a.mp3');
+        audios['taa_a']   = new Audio('assets/audio/taa_a.mp3');
+        audios['Taa2_a']  = new Audio('assets/audio/Taa2_a.mp3');
+        audios['thaa_a']  = new Audio('assets/audio/thaa_a.mp3');
+        audios['waaw_a']  = new Audio('assets/audio/waaw_a.mp3');
+        audios['yaa_a']   = new Audio('assets/audio/yaa_a.mp3');
+        audios['zaa_a']   = new Audio('assets/audio/zaa_a.mp3');
+
+        $(document).ready(function(){
+            const queryString = window.location.search;
+            let lang = findGetParameter('idioma')
+            console.log(lang);
+            localStorage.setItem('idioma', lang);
+        });
+
+        function findGetParameter(parameterName) {
+            var result = null,
+                tmp = [];
+            var items = location.search.substr(1).split("&");
+            for (var index = 0; index < items.length; index++) {
+                tmp = items[index].split("=");
+                if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+            }
+            return result;
+        }
+    </script>
+</head>
+
+<body>
+    <br>
+    <nav>
+        <a href="index.html" title="Seleção de idioma">Idiomas</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="introducao-russo.html" title="Introdução ao idioma">Introdução</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="caracteres.html" title="Memorização de Caracteres">Caracteres</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="vocabulario.html" title="Treino de Vocabulário">Vocabulário</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="desenho.html" title="Treino de Escrita">Escrita</a>
+    </nav>
+    <span id="zoomedChar"></span>
+    <br>
+
+    <table>
+        <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>Letra</th>
+                <th>Som</th>
+                <th>Isolada</th>
+                <th>Final</th>
+                <th>Meio</th>
+                <th>Inicial</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td class="portugues">16</td>
+                <td class="portugues letra" data-audio="Taa2_a">Tā</td>
+                <td class="portugues">ṭ</td>
+                <td class="copy" data-character="T">ط</td>
+                <td class="copy" data-character="T">ـط</td>
+                <td class="copy" data-character="T">ـطـ</td>
+                <td class="copy" data-character="T">طـ</td>
+            </tr>
+            <tr>
+                <td class="portugues">17</td>
+                <td class="portugues letra" data-audio="dhaa_a">Zā</td>
+                <td class="portugues">ż</td>
+                <td class="copy" data-character="dh">ظ</td>
+                <td class="copy" data-character="dh">ـظ</td>
+                <td class="copy" data-character="dh">ـظـ</td>
+                <td class="copy" data-character="dh">ظـ</td>
+            </tr>
+            <tr>
+                <td class="portugues">18</td>
+                <td class="portugues letra" data-audio="ayn_a">ʿAin</td>
+                <td class="portugues">ʿ</td>
+                <td class="copy" data-character="a">ع</td>
+                <td class="copy" data-character="a">ـع</td>
+                <td class="copy" data-character="a">ـعـ</td>
+                <td class="copy" data-character="a">عـ</td>
+            </tr>
+            <tr>
+                <td class="portugues">19</td>
+                <td class="portugues letra" data-audio="ghayn_a">Ghain</td>
+                <td class="portugues">ġ</td>
+                <td class="copy" data-character="gh">غ</td>
+                <td class="copy" data-character="gh">ـغ</td>
+                <td class="copy" data-character="gh">ـغـ</td>
+                <td class="copy" data-character="gh">غـ</td>
+            </tr>
+            <tr>
+                <td class="portugues">20</td>
+                <td class="portugues letra" data-audio="faa_a">Fā</td>
+                <td class="portugues">f</td>
+                <td class="copy" data-character="f">ف</td>
+                <td class="copy" data-character="f">ـف</td>
+                <td class="copy" data-character="f">ـفـ</td>
+                <td class="copy" data-character="f">فـ</td>
+            </tr>
+            <tr>
+                <td class="portugues">21</td>
+                <td class="portugues letra" data-audio="qaaf_a">Qaf</td>
+                <td class="portugues">q</td>
+                <td class="copy" data-character="q">ق</td>
+                <td class="copy" data-character="q">ـق</td>
+                <td class="copy" data-character="q">ـقـ</td>
+                <td class="copy" data-character="q">قـ</td>
+            </tr>
+            <tr>
+                <td class="portugues">22</td>
+                <td class="portugues letra" data-audio="kaaf_a">Kāf</td>
+                <td class="portugues">k</td>
+                <td class="copy" data-character="k">ك</td>
+                <td class="copy" data-character="k">ـك</td>
+                <td class="copy" data-character="k">ـكـ</td>
+                <td class="copy" data-character="k">كـ</td>
+            </tr>
+            <tr>
+                <td class="portugues">23</td>
+                <td class="portugues letra" data-audio="laam_a">Lām</td>
+                <td class="portugues">l</td>
+                <td class="copy" data-character="l">ل</td>
+                <td class="copy" data-character="l">ـل</td>
+                <td class="copy" data-character="l">ـلـ</td>
+                <td class="copy" data-character="l">لـ</td>
+            </tr>
+            <tr>
+                <td class="portugues">24</td>
+                <td class="portugues letra" data-audio="miim_a">Mīm</td>
+                <td class="portugues">m</td>
+                <td class="copy" data-character="m">م</td>
+                <td class="copy" data-character="m">ـم</td>
+                <td class="copy" data-character="m">ـمـ</td>
+                <td class="copy" data-character="m">مـ</td>
+            </tr>
+            <tr>
+                <td class="portugues">25</td>
+                <td class="portugues letra" data-audio="nuun_a">Nūn</td>
+                <td class="portugues">n</td>
+                <td class="copy" data-character="n">ن</td>
+                <td class="copy" data-character="n">ـن</td>
+                <td class="copy" data-character="n">ـنـ</td>
+                <td class="copy" data-character="n">نـ</td>
+            </tr>
+            <tr>
+                <td class="portugues">26</td>
+                <td class="portugues letra" data-audio="haa_a2">Hā</td>
+                <td class="portugues">h</td>
+                <td class="copy" data-character="h">ه</td>
+                <td class="copy" data-character="h">ـه</td>
+                <td class="copy" data-character="h">ـهـ</td>
+                <td class="copy" data-character="h">هـ</td>
+            </tr>
+            <tr>
+                <td class="portugues">27</td>
+                <td class="portugues letra" data-audio="waaw_a">Wāw</td>
+                <td class="portugues">w, ū</td>
+                <td class="copy" data-character="w">و</td>
+                <td class="copy" data-character="w">ـو</td>
+                <td class="copy" data-character="w" data-egoista="true">ـو</td>
+                <td class="copy" data-character="w">و</td>
+            </tr>
+            <tr>
+                <td class="portugues">28</td>
+                <td class="portugues letra" data-audio="yaa_a">Yā</td>
+                <td class="portugues">y, ī</td>
+                <td class="copy" data-character="y">ي</td>
+                <td class="copy" data-character="y">ـي</td>
+                <td class="copy" data-character="y">ـيـ</td>
+                <td class="copy" data-character="y">يـ</td>
+            </tr>
+            <tr>
+                <td class="portugues">-</td>
+                <td class="portugues letra" data-audio="zaa_a">Ta marbuta</td>
+                <td class="portugues">(t)</td>
+                <td class="copy" data-character="x">ة</td>
+                <td class="copy" data-character="x">ـة</td>
+                <td class="copy" data-character="x">&nbsp;</td>
+                <td class="copy" data-character="x">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="portugues">-</td>
+                <td class="portugues letra" data-audio="zaa_a">Hamza</td>
+                <td class="portugues">ʾ</td>
+                <td class="copy" data-character="x">ء</td>
+                <td class="copy" data-character="x">&nbsp;</td>
+                <td class="copy" data-character="x">&nbsp;</td>
+                <td class="copy" data-character="x">&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>Letra</th>
+                <th>Som</th>
+                <th>Isolada</th>
+                <th>Final</th>
+                <th>Meio</th>
+                <th>Inicial</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td class="portugues">1</td>
+                <td class="portugues letra" data-audio="alif_a">Alif</td>
+                <td class="portugues">ā</td>
+                <td class="copy" data-character="a">ا</td>
+                <td class="copy" data-character="a">ـا</td>
+                <td class="copy" data-character="a" data-egoista="true">ـا</td>
+                <td class="copy" data-character="a" data-egoista="true">ا</td>
+            </tr>
+            <tr>
+                <td class="portugues">2</td>
+                <td class="portugues letra" data-audio="baa_a">Bā</td>
+                <td class="portugues">b</td>
+                <td class="copy" data-character="b">ب</td>
+                <td class="copy" data-character="b">ـب</td>
+                <td class="copy" data-character="b">ـبـ</td>
+                <td class="copy" data-character="b">بـ</td>
+            </tr>
+            <tr>
+                <td class="portugues">3</td>
+                <td class="portugues letra" data-audio="taa_a">Tā</td>
+                <td class="portugues">t</td>
+                <td class="copy" data-character="t">ت</td>
+                <td class="copy" data-character="t">ـت</td>
+                <td class="copy" data-character="t">ـتـ</td>
+                <td class="copy" data-character="t">تـ</td>
+            </tr>
+            <tr>
+                <td class="portugues">4</td>
+                <td class="portugues letra" data-audio="thaa_a">Thā</td>
+                <td class="portugues"><u>t</u></td>
+                <td class="copy" data-character="th">ث</td>
+                <td class="copy" data-character="th">ـث</td>
+                <td class="copy" data-character="th">ـثـ</td>
+                <td class="copy" data-character="th">ثـ</td>
+            </tr>
+            <tr>
+                <td class="portugues">5</td>
+                <td class="portugues letra" data-audio="jiim_a">Jīm</td>
+                <td class="portugues">ğ</td>
+                <td class="copy" data-character="j">ج</td>
+                <td class="copy" data-character="j">ـج</td>
+                <td class="copy" data-character="j">ـجـ</td>
+                <td class="copy" data-character="j">جـ</td>
+            </tr>
+            <tr>
+                <td class="portugues">6</td>
+                <td class="portugues letra" data-audio="Haa_a1">Hā</td>
+                <td class="portugues">ḥ</td>
+                <td class="copy" data-character="H">ح</td>
+                <td class="copy" data-character="H">ـح</td>
+                <td class="copy" data-character="H">ـحـ</td>
+                <td class="copy" data-character="H">حـ</td>
+            </tr>
+            <tr>
+                <td class="portugues">7</td>
+                <td class="portugues letra" data-audio="khaa_a">Khā</td>
+                <td class="portugues">ḫ</td>
+                <td class="copy" data-character="kh">خ</td>
+                <td class="copy" data-character="kh">ـخ</td>
+                <td class="copy" data-character="kh">ـخـ</td>
+                <td class="copy" data-character="kh">خـ</td>
+            </tr>
+            <tr>
+                <td class="portugues">8</td>
+                <td class="portugues letra" data-audio="daal_a">Dāl</td>
+                <td class="portugues">d</td>
+                <td class="copy" data-character="d">د</td>
+                <td class="copy" data-character="d">ـد</td>
+                <td class="copy" data-character="d" data-egoista="true">ـد</td>
+                <td class="copy" data-character="d">د</td>
+            </tr>
+            <tr>
+                <td class="portugues">9</td>
+                <td class="portugues letra" data-audio="dhaal_a">Dhāl</td>
+                <td class="portugues">ḏ</td>
+                <td class="copy" data-character="dh">ذ</td>
+                <td class="copy" data-character="dh">ـذ</td>
+                <td class="copy" data-character="dh" data-egoista="true">ـذ</td>
+                <td class="copy" data-character="dh">ذ</td>
+            </tr>
+            <tr>
+                <td class="portugues">10</td>
+                <td class="portugues letra" data-audio="raa_a">Rā</td>
+                <td class="portugues">r</td>
+                <td class="copy" data-character="r">ر</td>
+                <td class="copy" data-character="r">ـر</td>
+                <td class="copy" data-character="r" data-egoista="true">ـر</td>
+                <td class="copy" data-character="r">ر</td>
+            </tr>
+            <tr>
+                <td class="portugues">11</td>
+                <td class="portugues letra" data-audio="zaa_a">Zāin</td>
+                <td class="portugues">z</td>
+                <td class="copy" data-character="z">ز</td>
+                <td class="copy" data-character="z">ـز</td>
+                <td class="copy" data-character="z" data-egoista="true">ـز</td>
+                <td class="copy" data-character="z">ز</td>
+            </tr>
+            <tr>
+                <td class="portugues">12</td>
+                <td class="portugues letra" data-audio="siin_a">Sīn</td>
+                <td class="portugues">s</td>
+                <td class="copy" data-character="s">س</td>
+                <td class="copy" data-character="s">ـس</td>
+                <td class="copy" data-character="s">ـسـ</td>
+                <td class="copy" data-character="s">سـ</td>
+            </tr>
+            <tr>
+                <td class="portugues">13</td>
+                <td class="portugues letra" data-audio="shiin_a">Shīn</td>
+                <td class="portugues">š</td>
+                <td class="copy" data-character="sh">ش</td>
+                <td class="copy" data-character="sh">ـش</td>
+                <td class="copy" data-character="sh">ـشـ</td>
+                <td class="copy" data-character="sh">شـ</td>
+            </tr>
+            <tr>
+                <td class="portugues">14</td>
+                <td class="portugues letra" data-audio="saad_a">Sād</td>
+                <td class="portugues">ṣ</td>
+                <td class="copy" data-character="s">ص</td>
+                <td class="copy" data-character="s">ـص</td>
+                <td class="copy" data-character="s">ـصـ</td>
+                <td class="copy" data-character="s">صـ</td>
+            </tr>
+            <tr>
+                <td class="portugues">15</td>
+                <td class="portugues letra" data-audio="daad_a">Dād</td>
+                <td class="portugues">ḍ</td>
+                <td class="copy" data-character="d">ض</td>
+                <td class="copy" data-character="d">ـض</td>
+                <td class="copy" data-character="d">ـضـ</td>
+                <td class="copy" data-character="d">ضـ</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <div class="tooltip">
+        <span class="tooltiptext">Tooltip text</span>
+    </div>
+
+    <input id="transcription">
+    <textarea id="copy"></textarea>
+
+    <p>
+        <button id="copyText">Copiar</button>
+        <button id="reset">Limpar</button>
+    </p>
+
+
+    <div class="ta-l">
+        <h2>Gramática</h2>
+        <div class="text-box">
+            <p>O alfabeto árabe contém 28 letras básicas.</p>
+            <p>Existe uma variedade de carecteres especiais e acentos vogais.</p>
+            <p>O alfabeto árabe não faz distinção de letras maiúsculas e minúsculas como no alfabeto ocidental.</p>
+            <p>O idioma árabe é lido e escrito da direita para esquerda.</p>
+            <p>É escrito em estilo cursivo.</p>
+            <p>As letras são conectadas umas as outras nas palavras.</p>
+            <p>Cada letra possui uma forma diferente dependendo de sua posição em uma palavra.</p>
+            <p>As quatro posições de uma letra em uma palavra são: isolada, inicial, intermediária e final.</p>
+            <p>Seis letras (ا (alif), د (daal), ذ (dhaal), ر (raa), ز (zayn / zaa), e و (waaw)) não têm formas intermediárias.</p>
+            <p>Elas são chamadas de <i>letras egoístas</i> e utilizam apenas as formas isolada e final dependendo da sua posição.</p>
+            <p>Não existem as consoantes P e V.</p>
+            <p>Não existem as vogais E e O.</p>
+            <p>Existem apenas 3 vogais A, I e U.</p>
+            <p>As vogais longas são representadas por consoantes fracas ( ا (alif), و (waaw), e ي (yaa)).</p>
+            <p>O sinais diacríticos (acentos gráficos) facultativos, chamados de harakat, fornecem os sons das vogais curtas e orientam a interpretação da pronúncia.</p>
+        </div>
+
+        <h2>História</h2>
+        <div class="text-box">
+            <p>O árabe (العربية, transl. al-ʻarabiyyah ) é uma língua semita central, parente próxima do hebraico e das línguas neo-aramaicas.</p>
+            <p>Estima-se que o aramaico foi um idioma criado por Sem, um dos filhos de Noé.</p>
+            <p>Estima-se que o árabe foi criado há cerca de 100 anos antes de Cristo.</p>
+            <p>Pertencente a família das línguas semíticas, que por sua vez, compõem o tronco linguístico das afro-asiáticas (ou camito-semitas).</p>
+            <p>A língua árabe é falada por mais de 280 milhões de pessoas como língua materna no Oriente Médio, Sudoeste Asiático e Norte da África.</p>
+            <p>Falada em 58 países, só é menos difundida no mundo do que o inglês.</p>
+            <p>É idioma oficial de 26 países, número atrás apenas do inglês e francês.</p>
+            <p>É a língua litúrgica do islamismo, por ser o idioma no qual o Corão, o livro sagrado islâmico, foi escrito.</p>
+        </div>
+
+        <h2>Países falantes de árabe</h2>
+        <img src="assets/A_map_of_the_Arab_World_with_flags.png">
+        <ul>
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-saudi-arabia.html">
+                    <img class="flag" src="assets/flags/saudi-arabia_flag-wave-500.png">
+                    Arábia Saudita
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-algeria.html">
+                    <img class="flag" src="assets/flags/algeria_flag-wave-500.png">
+                    Argélia
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-bahrain.html">
+                    <img class="flag" src="assets/flags/bahrain_flag-wave-500.png">
+                    Bahrein
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-qatar.html">
+                    <img class="flag" src="assets/flags/qatar_flag-wave-500.png">
+                    Catar
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-chad.html">
+                    <img class="flag" src="assets/flags/chad_flag-wave-500.png">
+                    Chade
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-comoros.html">
+                    <img class="flag" src="assets/flags/comoros_flag-wave-500.png">
+                    Comores
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-djibouti.html">
+                    <img class="flag" src="assets/flags/djibouti_flag-wave-500.png">
+                    Djibouti
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-egypt.html">
+                    <img class="flag" src="assets/flags/egypt_flag-wave-500.png">
+                    Egito
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-united-arab-emirates-the.html">
+                    <img class="flag" src="assets/flags/united-arab-emirates_flag-wave-500.png">
+                    Emirados Árabes Unidos
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-eritrea.html">
+                    <img class="flag" src="assets/flags/eritrea_flag-wave-500.png">
+                    Eritreia
+                </a>
+            </li>
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-yemen.html">
+                    <img class="flag" src="assets/flags/yemen_flag-wave-500.png">
+                    Iêmen
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-israel.html">
+                    <img class="flag" src="assets/flags/israel_flag-wave-500.png">
+                    Israel
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-iraq.html">
+                    <img class="flag" src="assets/flags/iraq_flag-wave-500.png">
+                    Iraque
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-jordan.html">
+                    <img class="flag" src="assets/flags/jordan_flag-wave-500.png">
+                    Jordânia
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-kuwait.html">
+                    <img class="flag" src="assets/flags/kuwait_flag-wave-500.png">
+                    Kuwait
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-lebanon.html">
+                    <img class="flag" src="assets/flags/lebanon_flag-wave-500.png">
+                    Líbano
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-libya.html">
+                    <img class="flag" src="assets/flags/libya_flag-wave-500.png">
+                    Líbia
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-morocco.html">
+                    <img class="flag" src="assets/flags/morocco_flag-wave-500.png">
+                    Marrocos
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-mauritania.html">
+                    <img class="flag" src="assets/flags/mauritania_flag-wave-500.png">
+                    Mauritânia
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-oman.html">
+                    <img class="flag" src="assets/flags/oman_flag-wave-500.png">
+                    Omã
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-palestine.html">
+                    <img class="flag" src="assets/flags/palestine_flag-wave-500.png">
+                    Palestina
+                </a>
+            </li>
+
+            <li>
+                <!-- =========================================================== -->
+                <a target="_blank" href="https://pt.wikipedia.org/wiki/Saara_Ocidental">
+                    <img class="flag" src="assets/flags/188px-Flag_of_the_Sahrawi_Arab_Democratic_Republic.svg.png">
+                    Saara Ocidental
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-syria.html">
+                    <img class="flag" src="assets/flags/syria_flag-wave-500.png">
+                    Síria
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-somalia.html">
+                    <img class="flag" src="assets/flags/somalia_flag-wave-500.png">
+                    Somália
+                </a>
+            </li>
+
+            <li>
+                <!-- =========================================================== -->
+                <a target="_blank" href="https://pt.wikipedia.org/wiki/Somalil%C3%A2ndia">
+                    <img class="flag" src="assets/flags/188px-Flag_of_Somaliland.svg.png">
+                    Somalilândia
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-sudan.html">
+                    <img class="flag" src="assets/flags/sudan_flag-wave-500.png">
+                    Sudão
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank" href="https://www.countryflags.com/en/flag-of-tunisia.html">
+                    <img class="flag" src="assets/flags/tunisia_flag-wave-500.png">
+                    Tunísia
+                </a>
+            </li>
+        </ul>
+    </div>
+    <br>
+    <br>
+    <!--  - ->
+    <table class="table table-bordered">
+                        <thead>
+                            <tr></tr>
+                        </thead>
+                            <tbody>
+                                <tr>
+                                    <td>أَنَا</td>
+                                    <td class="portugues">ʾanā</td>
+                                    <td class="portugues">eu (m/f)</td>
+                                    <td>نَحْنُ</td>
+                                    <td class="portugues">naḥnu</td>
+                                    <td class="portugues">nós</td>
+                                </tr>
+                                <tr>
+                                    <td>اَنْتَ</td>
+                                    <td class="portugues">ʾanta</td>
+                                    <td class="portugues">tu (m)</td>
+                                    <td>أَنْتُمْ</td>
+                                    <td class="portugues">ʾantum</td>
+                                    <td class="portugues">vós (m)</td>
+                                </tr>
+                                <tr>
+                                    <td>أَنْتِ</td>
+                                    <td class="portugues">ʾanti</td>
+                                    <td class="portugues">tu (f)</td>
+                                    <td>أَنْتُنَّ</td>
+                                    <td class="portugues">ʾantunna</td>
+                                    <td class="portugues">vós (f)</td>
+                                </tr>
+                                <tr>
+                                    <td>هُوَ</td>
+                                    <td class="portugues">huwa</td>
+                                    <td class="portugues">ele</td>
+                                    <td>هُمْ</td>
+                                    <td class="portugues">hum</td>
+                                    <td class="portugues">eles</td>
+                                </tr>
+                                <tr>
+                                    <td>هِيَ</td>
+                                    <td class="portugues">hiya</td>
+                                    <td class="portugues">ela </td>
+                                    <td>هُنَّ</td>
+                                    <td class="portugues">hunna</td>
+                                    <td class="portugues">elas </td>
+                                </tr>
+                                <tr>
+                                    <td>أَنْتُمَا</td>
+                                    <td class="portugues">ʾantumā</td>
+                                    <td class="portugues">eles (m/f, dual)</td>
+                                    <td>هُمَا</td>
+                                    <td class="portugues">humā</td>
+                                    <td class="portugues">eles (m/f, dual)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+
+
+
+                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="6" bgcolor="#fac832"><b>Os números cardinais de 1 a 10</b></th>
+                                                </tr>
+                                            </thead>
+                                                <tbody>
+                                                <tr>
+                                                <td bgcolor="#fac832"></td>
+                                                <td bgcolor="#fac832">masculino</td>
+                                                <td bgcolor="#fac832">masculino</td>
+                                                <td bgcolor="#fac832">feminino</td>
+                                                <td bgcolor="#fac832">feminino</td>
+                                                <td bgcolor="#fac832"><br></td>
+                                            </tr>
+                                            <tr>
+                                                <td>۰</td>
+                                                <td>صِفْرٌ</td>
+                                                <td class="portugues">ṣifrun</td>
+                                                <td>صِفْرٌ</td>
+                                                <td class="portugues">ṣifrun</td>
+                                                <td class="portugues">0</td>
+                                            </tr>
+                                            <tr>
+                                                <td>۱</td>
+                                                <td>وَاحِدَةٌ</td>
+                                                <td class="portugues">wāḥidatun</td>
+                                                <td>وَاحِدٌ</td>
+                                                <td class="portugues">wāḥidun</td>
+                                                <td class="portugues">1</td>
+                                            </tr>
+                                            <tr>
+                                                <td>۲</td>
+                                                <td>اثْنَتَانِ</td>
+                                                <td class="portugues">ʾiṯnatāni</td>
+                                                <td>اثْنَانِ</td>
+                                                <td class="portugues">ʾiṯnāni</td>
+                                                <td class="portugues">2</td>
+                                            </tr>
+                                            <tr>
+                                                <td>۳</td>
+                                                <td>ثَلاَثٌ</td>
+                                                <td class="portugues">ṯalāṯun</td>
+                                                <td>ثَلاَثَةٌ</td>
+                                                <td class="portugues">ṯalāṯatun</td>
+                                                <td class="portugues">3</td>
+                                            </tr>
+                                            <tr>
+                                                <td>٤</td>
+                                                <td>أَرْبع</td>
+                                                <td class="portugues">ʾarbaʿun</td>
+                                                <td>أَرْبَعَةٌ</td>
+                                                <td class="portugues">ʾarbaʿatun</td>
+                                                <td class="portugues">4</td>
+                                            </tr>
+                                            <tr>
+                                                <td>٥</td>
+                                                <td>خَمْسٌ</td>
+                                                <td class="portugues">ḫamsun</td>
+                                                <td>خَمْسَةٌ</td>
+                                                <td class="portugues">ḫamsatun</td>
+                                                <td class="portugues">5</td>
+                                            </tr>
+                                            <tr>
+                                                <td>٦</td>
+                                                <td>سِتٌ</td>
+                                                <td class="portugues">sittun</td>
+                                                <td>سِتَّةٌ</td>
+                                                <td class="portugues">sittatun</td>
+                                                <td class="portugues">6</td>
+                                            </tr>
+                                            <tr>
+                                                <td>۷</td>
+                                                <td>سَبْعَةٌ</td>
+                                                <td class="portugues">sabʿun</td>
+                                                <td>سَبْعَةٌ</td>
+                                                <td class="portugues">sabʿatun</td>
+                                                <td class="portugues">7</td>
+                                            </tr>
+                                            <tr>
+                                                <td>۸</td>
+                                                <td>ثَمَانٍ</td>
+                                                <td class="portugues">ṯamānin</td>
+                                                <td>ثَمَانِيَةٌ</td>
+                                                <td class="portugues">ṯamāniyatun</td>
+                                                <td class="portugues">8</td>
+                                            </tr>
+                                            <tr>
+                                                <td>۹</td>
+                                                <td>تِسْعٌ</td>
+                                                <td class="portugues">tisʿun</td>
+                                                <td>تِسْعَةٌ</td>
+                                                <td class="portugues">tisʿatun</td>
+                                                <td class="portugues">9</td>
+                                            </tr>
+                                            <tr>
+                                                <td>۱۰</td>
+                                                <td>عَشَرٌ</td>
+                                                <td class="portugues">ʿašrun</td>
+                                                <td>عَشَرَةٌ</td>
+                                                <td class="portugues">ʿašratun</td>
+                                                <td class="portugues">10</td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+    <!--  -->
+
+</body></html>
+<!--
+<div>
+    <table border="1" cellspacing="0" cellpadding="4" class="wikitable">
+    <caption><b>Caracteres especiais árabes:</b></caption>
+
+
+    <tr>
+        <td>ّ</td>
+        <td><i>xadda</i>; marca a geminação de uma consoante; kasra (ver abaixo) faz a transição entre shadda e a consoante geminada, quando presente; não é usada de forma consistente nos textos modernos;
+        </td>
+    </tr>
+
+    <tr>
+        <th colspan="2"><i>As vogais breves são apenas indicadas no Corão e nos livros de instrução de crianças.</i>
+        </th>
+    </tr>
+
+    <tr>
+        <td>ْ</td>
+        <td><i>suku:n</i>; marca uma consoante sem vogal a seguir
+        </td>
+    </tr>
+
+    <tr>
+        <td>َ</td>
+        <td><i>fatX\a</i>; /a/ breve
+        </td>
+    </tr>
+
+    <tr>
+        <td>ِ</td>
+        <td><i>kasra</i>; /i/ breve
+        </td>
+    </tr>
+
+    <tr>
+        <td>ُ</td>
+        <td><i>d'am:a</i>; /u/ breve</td>
+    </tr>
+</div>
+-->
+
+
+<div id="google_translate_element"></div>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
+</script>
+
+<!-- <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
+<script type="text/javascript">
+    (function(){var gtConstEvalStartTime = new Date();/*
+
+     Copyright The Closure Library Authors.
+     SPDX-License-Identifier: Apache-2.0
+    */
+    function d(b){var a=document.getElementsByTagName("head")[0];a||(a=document.body.parentNode.appendChild(document.createElement("head")));a.appendChild(b)}function _loadJs(b){var a=document.createElement("script");a.type="text/javascript";a.charset="UTF-8";a.src=b;d(a)}function _loadCss(b){var a=document.createElement("link");a.type="text/css";a.rel="stylesheet";a.charset="UTF-8";a.href=b;d(a)}function _isNS(b){b=b.split(".");for(var a=window,c=0;c<b.length;++c)if(!(a=a[b[c]]))return!1;return!0}
+    function _setupNS(b){b=b.split(".");for(var a=window,c=0;c<b.length;++c)a.hasOwnProperty?a.hasOwnProperty(b[c])?a=a[b[c]]:a=a[b[c]]={}:a=a[b[c]]||(a[b[c]]={});return a}window.addEventListener&&"undefined"==typeof document.readyState&&window.addEventListener("DOMContentLoaded",function(){document.readyState="complete"},!1);
+    if (_isNS('google.translate.Element')){return}(function(){var c=_setupNS('google.translate._const');c._cest = gtConstEvalStartTime;gtConstEvalStartTime = undefined;c._cl='en';c._cuc='googleTranslateElementInit';c._cac='';c._cam='';c._ctkk='444784.3169828605';var h='translate.googleapis.com';var s=(true?'https':window.location.protocol=='https:'?'https':'http')+'://';var b=s+h;c._pah=h;c._pas=s;c._pbi=b+'/translate_static/img/te_bk.gif';c._pci=b+'/translate_static/img/te_ctrl3.gif';c._pli=b+'/translate_static/img/loading.gif';c._plla=h+'/translate_a/l';c._pmi=b+'/translate_static/img/mini_google.png';c._ps=b+'/translate_static/css/translateelement.css';c._puh='translate.google.com';_loadCss(c._ps);_loadJs(b+'/translate_static/js/element/main.js');})();})();
+</script>
+
+<!-- <p>This example displays a vertical translate button.</p> -->

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171185330-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-171185330-2');
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Vocabulário</title>
+    <!-- tempo -->
+    <link rel="shortcut icon" href="assets/Japan-Flag-1-icon.png" />
+    <style type="text/css">
+        body {
+            /*background-color: maroon;*/
+            background-color: transparent;
+            color: white;
+            text-align: center;
+        }
+        #conteudo {
+            text-shadow: -7px 7px 4px black;
+            font-size: 160px;
+        }
+
+
+
+        i {
+            display: inline-block;
+            width: 50px;
+            border: 1px solid #aaa;
+            font-size: 40px;
+            font-style: normal;
+            text-shadow: 1px 1px 1px black;
+            color: #aaa;
+            margin: 4px 0px;
+            height: 50px;
+            cursor: pointer;
+        }
+        i:hover {
+            border-color: white;
+            color: #fff;
+            cursor: pointer;
+        }
+        i::selection { background-color: transparent; }
+
+        #spaceBar {
+            width: 500px;
+        }
+
+        #reset {
+            color: white;
+            cursor: pointer;
+            padding: 10px 0;
+            width: 90px;
+            /*margin: 0 10px 20px;*/
+            vertical-align: top;
+        }
+        #reset { background: darkred; }
+        #reset:hover { background: red; }
+
+        html {
+            /*border: 60px solid;*/
+            /*border-image: url("assets/arc.png") 178 166 / 90px 79px / 0rem round;*/
+            /*height: fit-content !important;*/
+            /*box-sizing: border-box;*/
+
+
+            height: 100%;
+            background-color: cornflowerblue;
+        }
+        /*#tecladoVirtual i,*/
+        /*#tecladoVirtual div {display: none}*/
+
+
+        table {
+            margin: 0 auto;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        td:nth-child(2) { font-weight: bold; }
+    </style>
+    <script src="assets/jquery.min.js"></script>
+    <script src="assets/frasesJ.js"></script>
+    <script src="assets/frasesR.js"></script>
+    <script src="assets/frasesA.js"></script>
+
+    <script>
+        var audios = [];
+        audios['acerto'] = new Audio('assets/audio/Vibrant_Game_Shutter_Alert_1_Short_Quick.mp3');
+        audios['erro']   = new Audio('assets/audio/Error or failed.mp3');
+
+        var frases = frasesR;
+        if ( localStorage.getItem('idioma') == 'JP' ) {
+            frases = frasesJ;
+        } else if ( localStorage.getItem('idioma') == 'AR' ) {
+            frases = frasesA;
+        } else if ( localStorage.getItem('idioma') != 'RU') {
+            window.location.href = 'index.html';
+        }
+
+        $(document).ready(function(){
+
+            executeProgram();
+
+            $("body").on('keyup', 'textarea', function(){
+                validar();
+            });
+
+            $("body").on('click', '#pular', function(){
+                if ($("#recorde").text() < $("#acertos").text()) {
+                    $("#recorde").text( $("#acertos").text() )
+                }
+                $("#acertos").text(0);
+                executeProgram();
+            });
+
+            /* modo arabe */
+            $("#tecladoVirtual i").click(function(){
+                $("textarea").val( $("textarea").val() + $(this).text() );
+                validar();
+            });
+
+            $(document).on('click', '#reset', function(e) {
+                $("textarea").val('');
+            });
+
+            $("#queroDigitar").change(function(){
+                if ( $(this).val() == 'PT' ) {
+                    askOnly = 0;
+                } else if ( $(this).val() == 'JP' ) {
+                    askOnly = 1;
+                } else {
+                    askOnly = -1;
+                }
+                $("#pular").click();
+            });
+
+            $("#filtrar").change(function(){
+                wordsGroup = $(this).val();
+                $("#pular").click();
+            });
+
+            /* fixURL */
+            if ( localStorage.getItem('idioma') == 'JP') {
+                $("nav a:eq(1)").attr('href', 'introducao-japones.html');
+            } else if ( localStorage.getItem('idioma') == 'AR') {
+                $("nav a:eq(1)").attr('href', 'introducao-arabe.html');
+            }
+        });
+
+        let n = 0;
+        let responderEm = 'JP';
+        let askOnly = -1;
+        let wordsGroup = -1;
+        function executeProgram ()
+        {
+            let r;
+
+            if (askOnly != -1) {
+                r = askOnly;
+            } else {
+                r = getRandomInt(0, 2);
+            }
+
+            var i = 0
+            if (wordsGroup > -1) {
+                i = wordsGroup;
+            } else {
+                i = getRandomInt(0, frases.length);
+            }
+            n = getRandomInt(0, frases[i].frases.length);
+
+            // console.log(r);
+            let w = frases[i].frases[n];
+
+
+            var keyboard = "#kbR";
+            if ( localStorage.getItem('idioma') == 'JP' ) {
+                keyboard = "#kbJ";
+            }
+
+            if ( r == 1 ) {
+                responderEm = 'JP';
+                $("#tecladoVirtual i").fadeIn();
+                $("#tecladoVirtual "+keyboard).fadeIn();
+                $("#conteudo").html( w.frase );
+                $("#conteudo").attr('title', w.fraseX );
+                $("#dica").html( w.fraseT );
+            } else {
+                responderEm = 'PT';
+                $("#tecladoVirtual i").fadeOut();
+                $("#tecladoVirtual "+keyboard).fadeOut();
+                $("#conteudo").html( w.fraseX );
+                $("#conteudo").attr('title', w.frase );
+                $("#dica").html( w.fraseT );
+            }
+        }
+
+        // var wordgroup = -1;
+        function verificarAcerto ()
+        {
+            return $("textarea").val().toLowerCase() == $("#conteudo").attr("title");
+
+            if (responderEm == 'PT') {
+                /*return $("textarea").val().toLowerCase() == frases[n].frase;*/
+                return $("textarea").val().toLowerCase() == $("#conteudo").attr("title");
+            }
+
+            if ( localStorage.getItem('idioma') == 'JP' ) {
+                return $("textarea").val() == frases[n].fraseJ;
+            }
+
+            return $("textarea").val() == frases[n].fraseR;
+        }
+
+        function getRandomInt (min, max)
+        {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+
+        function validar ()
+        {
+            if ( verificarAcerto() ) {
+                $("#acertos").text( Number($("#acertos").text()) +1 );
+                console.log("emitiu som acerto!");
+                audios['acerto'].play();
+
+                setTimeout(function(){
+                    executeProgram();
+                    $("textarea").val('');
+                }, 1000);
+            }
+        }
+    </script>
+</head>
+<body>
+    <br>
+    <nav>
+        <a href="index.html" title="Seleção de idioma">Idiomas</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="introducao-russo.html" title="Introdução ao idioma">Introdução</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="caracteres.html" title="Memorização de Caracteres">Caracteres</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="vocabulario.html" title="Treino de Vocabulário">Vocabulário</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="desenho.html" title="Treino de Escrita">Escrita</a>
+    </nav>
+    <br>
+
+
+    <table>
+        <tr>
+            <td>Recorde</td>
+            <td><span id="recorde">0</span></td>
+        </tr>
+        <tr>
+            <td>Pontos</td>
+            <td><span id="acertos">0</span></td>
+        </tr>
+    </table>
+
+    <button id="pular">Pular</button>
+    <div id="conteudo"></div>
+    <div id="dica"></div>
+    <br>
+    <textarea></textarea>
+    <button id="reset">Limpar</button>
+    <br>
+
+    <div id="tecladoVirtual">
+        <div id="kbJ" style="display: none">
+            <i>あ</i>
+            <i>い</i>
+            <i>う</i>
+            <i>え</i>
+            <i>お</i>
+            <i>か</i>
+            <i>き</i>
+            <i>く</i>
+            <i>け</i>
+            <i>こ</i>
+            <i>が</i>
+            <i>ぎ</i>
+            <i>ぐ</i>
+            <i>げ</i>
+            <i>ご</i>
+            <i>さ</i>
+            <i>し</i>
+            <i>す</i>
+            <i>せ</i>
+            <i>そ</i>
+            <i>ざ</i>
+            <i>じ</i>
+            <i>ず</i>
+            <i>ぜ</i>
+            <i>ぞ</i>
+            <i>た</i>
+            <i>ち</i>
+            <i>つ</i>
+            <i>て</i>
+            <i>と</i>
+            <i>だ</i>
+            <i>ぢ</i>
+            <i>づ</i>
+            <i>で</i>
+            <i>ど</i>
+            <i>な</i>
+            <i>に</i>
+            <i>ぬ</i>
+            <i>ね</i>
+            <i>の</i>
+            <i>は</i>
+            <i>ひ</i>
+            <i>ふ</i>
+            <i>へ</i>
+            <i>ほ</i>
+            <i>ば</i>
+            <i>び</i>
+            <i>ぶ</i>
+            <i>べ</i>
+            <i>ぼ</i>
+            <i>ぱ</i>
+            <i>ぴ</i>
+            <i>ぷ</i>
+            <i>ぺ</i>
+            <i>ぽ</i>
+            <i>ま</i>
+            <i>み</i>
+            <i>む</i>
+            <i>め</i>
+            <i>も</i>
+            <i>や</i>
+            <i>ゆ</i>
+            <i>よ</i>
+            <i>ら</i>
+            <i>り</i>
+            <i>る</i>
+            <i>れ</i>
+            <i>ろ</i>
+            <i>わ</i>
+            <i>ゐ</i>
+            <i>ゑ</i>
+            <i>を</i>
+        </div>
+
+        <div id="kbR" style="display: none">
+            <i>а</i>
+            <i>б</i>
+            <i>в</i>
+            <i>г</i>
+            <i>д</i>
+            <i>е</i>
+            <i>ё</i>
+            <i>ж</i>
+            <i>з</i>
+            <i>и</i>
+            <i>й</i>
+            <i>к</i>
+            <i>л</i>
+            <i>м</i>
+            <i>н</i>
+            <i>о</i>
+            <i>п</i>
+            <i>р</i>
+            <i>с</i>
+            <i>т</i>
+            <i>у</i>
+            <i>ф</i>
+            <i>х</i>
+            <i>ц</i>
+            <i>ч</i>
+            <i>ш</i>
+            <i>щ</i>
+            <i>ъ</i>
+            <i>ы</i>
+            <i>ь</i>
+            <i>э</i>
+            <i>ю</i>
+            <i>я</i>
+        </div>
+
+        <br>
+        <i id="spaceBar"> </i>
+    </div>
+    <br>
+    <label for="queroDigitar">queroDigitar:</label>
+    <select id="queroDigitar">
+        <option value="">Ambos</option>
+        <option value="PT">Português</option>
+        <option value="JP">Japonês</option>
+    </select>
+
+    <label for="filtrar">filtrar:</label>
+    <select id="filtrar">
+        <option value="-1">Todos</option>
+        <option value="0">Pronomes</option>
+        <option value="1">Substantivos</option>
+        <option value="2">Expressões</option>
+        <option value="3">Numerais</option>
+    </select>
+</body></html>

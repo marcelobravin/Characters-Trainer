@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171185330-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-171185330-2');
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Memorização Alfabeto</title>
+    <link rel="shortcut icon" href="assets/Japan-Flag-1-icon.png" />
+    <style type="text/css">
+        body { text-align: center; background-color: transparent}
+        label {
+            cursor: pointer;
+            margin: 40px 10%;
+            border: 1px solid silver;
+            width: 110px;
+            display: inline-block;
+            height: 120px;
+            background-color: white;
+            font-size: 40px;
+            text-align: center;
+            text-shadow: 2px 2px 4px grey;
+
+            /*width: 100%;*/
+            /*height: 100%;*/
+            transition: transform 1s;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        label:hover {
+            border: 1px solid black;
+        }
+
+        html {
+            /*bord*/er: 2px solid;
+            /*height: fit-content !important;*/
+            height: 100%;
+            box-sizing: border-box;
+
+          /*background: url(assets/vintage-invitation-card-template-frame-600w-331376474.png) top center no-repeat;*/
+
+            background-color: maroon;
+            /*background-color: maroon;*/
+            /*border-image: url("assets/arc.png") 203 173 / 90px 79px / 0rem round;*/
+        }
+
+
+
+        label,
+        .card__face { border-radius: 10px }
+
+        .card.is-flipped {
+          transform: rotateY(180deg);
+        }
+
+        .card__face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0px;
+          /*-webkit-backface-visibility: hidden;*/
+          /*backface-visibility: hidden;*/
+        }
+
+        .card__face--back {
+          background: red;
+          transform: rotateY(180deg);
+          border: 1px solid black;
+          line-height: 100px;
+          top: -1px;
+          left: -1px;
+        }
+
+        .card__face--back.correct {
+          background: lime;
+          /*transform: rotateY(180deg);*/
+        }
+
+
+
+
+        table {
+            margin: 0 auto;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        td:nth-child(2) { font-weight: bold; }
+
+
+
+/*        label:hover {
+          transform: rotateY(180deg);
+        }
+*/
+    </style>
+    <script src="assets/jquery.min.js"></script>
+    <script src="assets/japanese-chars.js"></script>
+    <script src="assets/russian-chars.js"></script>
+    <script src="assets/arabic-chars.js"></script>
+    <script>
+        $(document).ready(function(){
+            var audios = [];
+            audios['acerto'] = new Audio('assets/audio/Vibrant_Game_Shutter_Alert_1_Short_Quick.mp3');
+            audios['erro']   = new Audio('assets/audio/Error or failed.mp3');
+
+            var chars;
+            if ( localStorage.getItem('idioma') == 'JP' ) {
+                chars = JChars;
+            } else if ( localStorage.getItem('idioma') == 'RU' ) {
+                chars = RChars;
+            } else if ( localStorage.getItem('idioma') == 'AR' ) {
+                chars = AChars;
+            }
+
+            $("body").on('click', '[type=radio]', function(){
+                $(this).parent().css("transform", "rotateY(180deg)");
+
+                if ( verificarAcerto( $(this).val(), chars ) ) {
+                    $("#acertos").text( Number($("#acertos").text()) +1 );
+                    audios['acerto'].play();
+                } else {
+                    if ($("#recorde").text() < $("#acertos").text()) {
+                        $("#recorde").text( $("#acertos").text() )
+                    }
+                    $("#acertos").text(0);
+                    audios['erro'].play();
+                }
+
+                setTimeout(function(){
+                    executeProgram(chars);
+                }, 1000);
+            });
+
+            $("html").click(function(e){
+                if ($("[type=radio]").length == 0) {
+                    executeProgram(chars);
+                }
+            });
+
+            $("button").click(function(){
+                chars[n].som.play();
+            });
+
+            /* fixURL */
+            if ( localStorage.getItem('idioma') == 'JP') {
+                $("nav a:eq(1)").attr('href', 'introducao-japones.html');
+            } else if ( localStorage.getItem('idioma') == 'AR') {
+                $("nav a:eq(1)").attr('href', 'introducao-arabe.html');
+            } else if ( localStorage.getItem('idioma') != 'RU') {
+                window.location.href = 'index.html';
+            }
+        });
+
+        let n = 0;
+        function executeProgram (chars)
+        {
+            n = getRandomInt (0, chars.length);
+
+            var alternativas = gerarAlternativas(n, chars.length);
+
+            let x = '';
+            alternativas.forEach(function(a, b){
+                x += "<label>";
+                x += "<input type='radio' name='resposta' value='"+ chars[alternativas[b]].letra +"'>";
+                x += "<br>";
+
+                let position = 0;
+                if ( localStorage.getItem('idioma')=='AR' ) {
+                    position = getRandomInt(0, 4);
+                    switch (position) {
+                        case 0:
+                            x += chars[alternativas[b]].isolada;
+                        break;
+                        case 1:
+                            x += chars[alternativas[b]].comeco;
+                        break;
+                        case 2:
+                            x += chars[alternativas[b]].meio;
+                        break;
+                        case 3:
+                            x += chars[alternativas[b]].fim;
+                        break;
+                    }
+                } else {
+
+                    position = getRandomInt(0, 2);
+                    switch (position) {
+                        case 0:
+                            x += chars[alternativas[b]].hiragana;
+                        break;
+                        case 1:
+                            x += chars[alternativas[b]].katakana;
+                        break;
+                    }
+                }
+
+                if (n==a) {
+                    x += "<div class='card__face--back card__face correct'>-!-</div>";
+                } else {
+                    x += "<div class='card__face--back card__face'>^_^'</div>";
+                }
+
+                x += "</label>";
+            });
+
+            $("#conteudo").html( x );
+            chars[n].som.play();
+        }
+
+        function verificarAcerto ( resposta, chars )
+        {
+            return resposta == chars[n].letra
+        }
+
+        function gerarAlternativas (alvo, length)
+        {
+            let alternativas = [...new Set()];
+            let inseriuCorreta = false;
+
+            while ( alternativas.length < 6 ) {
+                let n = getRandomInt (0, length);
+
+                if ( n != alvo ) {
+                    alternativas.push(n);
+                    alternativas = [...new Set(alternativas)];
+                } else {
+                    if ( !inseriuCorreta ) {
+                        inseriuCorreta = true;
+                        alternativas.push(n);
+                        alternativas = [...new Set(alternativas)];
+                    }
+                }
+            }
+
+            if ( !inseriuCorreta ) {
+                let x = getRandomInt (0, 5);
+                alternativas[x] = n;
+            }
+
+            return alternativas;
+        }
+
+        function getRandomInt (min, max)
+        {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+    </script>
+</head>
+<body>
+    <br>
+    <nav>
+        <a href="index.html" title="Seleção de idioma">Idiomas</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="introducao-russo.html" title="Introdução ao idioma">Introdução</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="caracteres.html" title="Memorização de Caracteres">Caracteres</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="vocabulario.html" title="Treino de Vocabulário">Vocabulário</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="desenho.html" title="Treino de Escrita">Escrita</a>
+    </nav>
+    <br>
+    <table>
+        <tr>
+            <td>Recorde</td>
+            <td><span id="recorde">0</span></td>
+        </tr>
+        <tr>
+            <td>Pontos</td>
+            <td><span id="acertos">0</span></td>
+        </tr>
+    </table>
+
+    <button>Play</button>
+    <div id="conteudo">
+        <label></label>
+        <label></label>
+        <label></label>
+        <label></label>
+        <label></label>
+        <label></label>
+    </div>
+</body></html>
